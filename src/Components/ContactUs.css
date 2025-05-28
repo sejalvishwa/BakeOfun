@@ -1,0 +1,165 @@
+*{
+  font-family: 'Poppins', sans-serif;
+}
+
+.contact-us-container{
+    background-color: #FEC107;
+    padding: 50px;
+}
+
+.contact-us-container h1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-weight: 400;
+    font-size: 35px;
+}
+
+.map-section {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  position: relative;
+  z-index: 1;
+}
+
+.contact-flex {
+  display: flex;
+  /* justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 40px;
+  width: 80%; */
+  gap : 2rem;
+  width: 90%;
+  margin:auto;
+  
+  
+}
+
+
+.contact-flex > div:first-child {
+  flex: 0 0 60%;
+}
+
+.contact-flex > div:last-child {
+  flex: 0 0 40%;
+}
+
+/* .contact-form {
+  padding: 1.5rem;
+} */
+
+.contact-form label {
+ display: block;
+  margin-bottom: 1.5rem; /* Adds spacing between labels */
+  font-weight: 400;
+  color: #2e2f30;
+}
+
+.contact-form input,
+.contact-form textarea {
+  margin-top: 5px;
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.contact-form textarea {
+  min-height: 100px;
+}
+
+.contact-form button {
+  width: 100px;
+  background-color: #3e5264;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+/* .store-details {
+  width: 40%;
+} */
+
+.store-details h3 {
+  margin-bottom: 0.5rem;
+  color: #34495E;
+}
+
+.store-details p {
+  margin: 0.25rem 0;
+  color: #908C8D;
+}
+
+.contact-form,
+.store-details {
+  /* background-color: #f9f9f9; */
+  padding: 1.5rem;
+  /* border-radius: 8px; */
+  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
+}
+
+.store-details p + p {
+  margin-top: 1rem; /* Adds space between address and phone */
+}
+
+/* Tablet / iPad (<= 1024px) */
+@media (max-width: 1024px) {
+  .contact-flex {
+    flex-wrap: wrap;
+    width: 95%;
+  }
+  .contact-flex > div:first-child,
+  .contact-flex > div:last-child {
+    flex: 0 0 100%; /* Full width stacked */
+  }
+  .contact-us-container {
+    padding: 40px 30px;
+  }
+  .contact-us-container h1 {
+    font-size: 28px;
+  }
+}
+
+/* Mobile (<= 768px) */
+@media (max-width: 768px) {
+  .contact-us-container {
+    padding: 30px 15px;
+  }
+
+  .contact-us-container h1 {
+    font-size: 24px;
+  }
+
+  .contact-flex {
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 95%;
+  }
+
+  .contact-form button {
+    width: 100%; /* Full width button on mobile */
+    padding: 12px 0;
+    font-size: 16px;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    font-size: 14px;
+  }
+
+  .store-details h3 {
+    font-size: 12px;
+  }
+
+  .store-details p {
+    font-size: 14px;
+  }
+
+  .map-section iframe {
+    height: 250px; /* smaller height for mobile */
+  }
+}

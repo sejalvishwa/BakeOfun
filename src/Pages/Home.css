@@ -1,0 +1,263 @@
+body {
+  margin: 0;
+  overflow-x: hidden; 
+}
+.banner-container {
+  position: relative;
+  width: 100%;
+}
+
+.banner-img {
+  width: 100%;
+  display: block;
+}
+
+/* Yellow strip at bottom */
+.banner-bottom {
+  background-color: #ffc800; /* Yellow */
+  text-align: center;
+  padding: 20px 0;
+}
+
+/* Blue "Shop Now" button */
+.shop-button {
+  background-color: #2C2C93; /* Blue */
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: opacity 0.3s ease;
+}
+
+.text-about-us h1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 45px;
+    font-weight: 500;
+    color: #1D1D62;
+}
+
+.text-about-us p{
+text-align: center;
+margin: 0 auto;
+font-size: 20px;
+margin-top: 20px;
+color: rgb(46, 46, 46,1);
+line-height: 1.6;
+}
+
+.center-line {
+  display: inline;
+}
+
+.Learn-more-btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+
+.Learn-more-btn button{
+  background-color: #F5C600;
+  color: #353535;
+  border: none;
+  padding: 16px 26px;
+  border-radius: 8px;
+  font-size: 14px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.Learn-more-btn button:hover{
+  background-color: #FFCE00;
+
+}
+
+.featured-products h1{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+  font-size: 28px;
+  color: #2C2C93;
+}
+
+.product-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 50px;
+  margin-top: 20px;
+  flex-wrap: nowrap; 
+  overflow-x: auto; 
+  padding: 10px 0;
+}
+
+.product-wrapper {
+ width: 220px;
+  text-align: center;
+  margin-bottom: 20px;
+  flex-shrink: 0; 
+}
+
+.product-card {
+  border: 1px solid #dbdbdb;
+  padding: 10px;
+  /* border-radius: 8px; */
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.product-card img {
+  width: 100%;
+  height: auto;
+  /* border-radius: 5px; */
+}
+
+/* Name and price outside the card */
+.product-info {
+  margin-top: 10px;
+}
+
+.product-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #222;
+}
+
+.product-price {
+  font-size: 14px;
+  color: #444;
+}
+
+.our-focus-section{
+  background-color: #2C2C93;
+  padding: 50px 0;        
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  position: relative;
+  z-index: 1;
+}
+
+.our-focus-section h1{
+  color: #ffc002;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.why-choose-us {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 60px 0 40px;
+  flex-wrap: wrap;
+  text-align: center;
+  
+}
+
+.feature-card {
+  max-width: 250px;
+  margin: 20px;
+}
+
+.feature-card img {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  margin-bottom: 15px;
+  
+}
+
+.feature-card p {
+  font-size: 16px;
+  color: #1c1c1c;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.our-forte-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  padding: 40px 60px; 
+  background-image: url('../assets/images/BakeOfun-Bg.jpg');
+  background-size: cover;
+  margin-top: 60px;
+  width: 100vw;
+  box-sizing: border-box;
+  margin-left: calc(-50vw + 50%);
+}
+
+.forte-items {
+ background: rgba(255, 255, 255, 0.2); /* semi-transparent */
+  padding: 30px 60px;
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); /* deeper shadow for depth */
+  backdrop-filter: blur(10px); /* blur for glassmorphism */
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* light border for shine */
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.forte-items:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+}
+
+.forte-items img {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 20px;
+  /* background-color: #F5C600; */
+}
+
+.forte-items h3 {
+  margin: 10px 0;
+  color: #2C2C93;
+}
+
+.forte-items p {
+  color: #000000;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.our-presence-section {
+  background-color: white;
+  padding: 50px 0;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.our-presence-section h1 {
+  color: #FFCE00;
+  font-size: 35px;
+  font-weight: 600;
+  margin-bottom: 40px;
+}
+
+.our-presence-logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px; /* spacing between logos */
+  flex-wrap: wrap; /* wraps on small screens */
+}
+
+.our-presence-logos img {
+  width: 200px;
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.3s;
+}
+
+.our-presence-logos img:hover {
+  transform: scale(1.05);
+}

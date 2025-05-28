@@ -1,0 +1,51 @@
+.about-us-section {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.about-us-section h1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 45px;
+  font-weight: 500;
+  color: #1D1D62;
+  font-size: 26px;
+}
+
+.about-us-section p {
+  text-align: center;
+  margin: 20px auto 0 auto;
+  font-size: 16px;
+  color: rgb(46, 46, 46);
+  line-height: 1.6;
+}
+
+.about-us-section .center-line {
+  display: inline;
+  font-weight: 600;
+}
+
+.about-us-section .learn-more-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.about-us-section .learn-more-btn button {
+  background-color: #F5C600;
+  color: #353535;
+  border: none;
+  padding: 16px 26px;
+  border-radius: 8px;
+  font-size: 12px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.about-us-section .learn-more-btn button:hover {
+  background-color: #FFCE00;
+}

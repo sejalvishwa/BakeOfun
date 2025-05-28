@@ -1,0 +1,60 @@
+.product-detail {
+  padding: 2rem;
+  text-align: center;
+}
+
+.product-image {
+  width: 200px;
+  height: auto;
+  border-radius: 10px;
+}
+
+.share-section {
+  margin-top: 2rem;
+}
+
+.availability img {
+  width: 100px;
+  margin: 0 1rem;
+}
+
+.you-may-also-like {
+  margin-top: 3rem;
+}
+
+.zoom-container {
+  overflow: hidden;
+  display: inline-block;
+}
+
+.zoom-on-hover {
+  transition: transform 0.3s ease;
+  cursor: zoom-in;
+}
+
+.zoom-on-hover:hover {
+  transform: scale(1.2);
+  z-index: 10;
+}
+
+
+.product-info h2 {
+  margin-bottom: 1.75rem;
+}
+
+.price {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    display: block;
+   
+}
+
+
+.product-info .availability img {
+  height: 40px;
+  margin-right: 1rem;
+}
+
+.availability h5 {
+  margin-bottom: 0.75rem;
+}

@@ -1,0 +1,272 @@
+.yellow-bar {
+  width: 100%;
+  height: 50px;
+  background-color: #ffc107;
+  margin-top: 70px;
+}
+
+.logo {
+  text-align: left;
+  padding-left: 30px; /* Optional: adds space from the left edge */
+}
+
+.logo img {
+  margin-top: 18rem;
+  width: 100%;
+  max-width: 400px; /* Limit max size if needed */
+}
+
+
+.about-logo-right h2{
+    margin-top: 70px;
+    color: #2C2C93;
+    font-size: 28px;
+}
+
+.trusted-para p{
+    margin-top: 30px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.ultimate-goal-para p{
+ margin-top: 30px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.breadImage{
+  margin-top: 80px;
+}
+
+.our-plant h2{
+  color: #ffc107;
+  margin-top: 100px;
+}
+
+.plant-para-section{
+  margin-top: 30px;
+}
+
+.manuacturing-unit-para p{
+font-weight: 600;
+}
+
+.our-reach-main{
+  margin-bottom: 4rem;
+}
+
+.Our-reach-heading h2{
+  margin-top: 60px;
+  color: #2C2C93;
+}
+
+.our-reach-para1{
+  margin-top: 20px;
+  font-weight: 600;
+}
+
+.smallBadge img{
+    width: 80%;
+}
+
+.reach-recognition h4{
+    color: #ffc107;
+    
+}
+.reach-recognition p{
+   margin-top: 20px;
+    
+}
+
+.BigBadge img{
+  margin-left: 10rem;
+}
+
+/* iPad / Tablet (<= 1024px) */
+@media (max-width: 1024px) {
+  .logo img {
+    margin-top: 5rem;
+    margin-right: 0;
+    width: 80%;
+  }
+
+  .about-logo-right h2 {
+    margin-top: 40px;
+    font-size: 28px;
+  }
+
+  .trusted-para p,
+  .ultimate-goal-para p {
+    margin-top: 20px;
+    font-size: 18px;
+  }
+
+  .breadImage {
+    margin-top: 40px;
+    text-align: center;
+  }
+
+  .breadImage img {
+    width: 90%;
+  }
+
+  .our-plant h2 {
+    margin-top: 50px;
+    font-size: 28px;
+  }
+
+  .plant-para-section {
+    margin-top: 20px;
+    padding: 0 10px;
+  }
+
+  .manuacturing-unit-para p {
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  .our-reach-main {
+    margin-bottom: 3rem;
+    padding: 0 10px;
+  }
+
+  .Our-reach-heading h2 {
+    margin-top: 40px;
+    font-size: 28px;
+  }
+
+  .our-reach-para1 {
+    margin-top: 15px;
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  .smallBadge img {
+    width: 60%;
+  }
+
+  .reach-recognition h4 {
+    font-size: 18px;
+  }
+
+  .reach-recognition p {
+    margin-top: 15px;
+    font-size: 14px;
+  }
+
+  .BigBadge img {
+    margin-left: 0;
+    width: 80%;
+    display: block;
+    margin: 2rem auto 0 auto;
+  }
+}
+
+/* Mobile (<= 768px) */
+@media (max-width: 768px) {
+  .logo img {
+    margin-top: 3rem;
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .about-logo-right h2 {
+    margin-top: 30px;
+    font-size: 24px;
+    text-align: center;
+  }
+
+  .trusted-para p,
+  .ultimate-goal-para p {
+    margin-top: 15px;
+    font-size: 16px;
+    text-align: center;
+    padding: 0 15px;
+  }
+
+  .breadImage {
+    margin-top: 30px;
+    text-align: center;
+  }
+
+  .breadImage img {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .our-plant h2 {
+    margin-top: 40px;
+    font-size: 24px;
+    text-align: center;
+  }
+
+  .plant-para-section {
+    margin-top: 20px;
+    padding: 0 15px;
+  }
+
+  .manuacturing-unit-para p {
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .our-reach-main {
+    margin-bottom: 2rem;
+    padding: 0 15px;
+  }
+
+  .Our-reach-heading h2 {
+    margin-top: 30px;
+    font-size: 24px;
+    text-align: center;
+  }
+
+  .our-reach-para1 {
+    margin-top: 15px;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+    padding: 0 10px;
+  }
+
+  .smallBadge img {
+    width: 50%;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .reach-recognition h4 {
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .reach-recognition p {
+    margin-top: 10px;
+    font-size: 13px;
+    text-align: center;
+    padding: 0 10px;
+  }
+
+  .BigBadge img {
+    margin-left: 0;
+    width: 90%;
+    max-width: 250px;
+    display: block;
+    margin: 2rem auto 0 auto;
+  }
+
+  /* Layout stacking for containers and rows */
+  .container .row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .container .row > div {
+    width: 100% !important;
+    max-width: 450px;
+    margin-bottom: 2rem;
+  }
+}

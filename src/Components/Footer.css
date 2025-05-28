@@ -1,0 +1,262 @@
+.footer-section {
+  background-color: #021c63;
+  color: white;
+  padding: 1px 60px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+/* Equal width columns */
+.footer-column {
+  flex: 1;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* About Section */
+.footer-logo {
+  width: 80%;
+  margin-bottom: 15px;
+}
+
+.footer-about {
+  margin-top: 10px;
+  margin-top: 40px;
+}
+
+.footer-about h4 {
+  color: #FFCE00;
+  margin-bottom: 10px;
+  text-decoration: underline;
+  font-size: 20px;
+}
+
+.footer-about p{
+  line-height: 2rem;
+  font-size: 14px;
+}
+
+/* Contact Section */
+
+.contact-column{
+  margin-top: 40px;
+}
+.contact-column h4 {
+  color: #FFCE00;
+  margin-bottom: 10px;
+  text-decoration: underline;
+  margin-left: 100px;
+  font-size: 20px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 15px;
+  margin-left: 20px;
+  margin-top: 20px;
+  font-size: 14px;
+
+}
+
+/* Social Section */
+
+.social-column{
+  margin-top: 40px;
+}
+.social-column h4 {
+  color: #FFCE00;
+  margin-bottom: 10px;
+  text-decoration: underline;
+  margin-left: 40px;
+}
+
+.social-icons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  margin-left: 40px;
+}
+
+.social-icons a {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  background-color: #2a2d34;
+  border-radius: 4px;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.social-icons a:hover {
+  background-color: #4da1ff;
+}
+
+.footer-bottom {
+width: 100vw; /* Full width of the viewport */
+ width: 100vw;
+  background-color: #10256F;
+  padding: 2px 0;
+  margin-top: 10px;
+  margin-bottom: 1px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+
+  color: #fff; /* Set text color to white */
+  font-size: 12px;
+  text-align: center;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  transform: translateX(-50%);
+}
+
+.footer-bottom a {
+  color: #fff;            /* Make link text white */
+  text-decoration: none;  /* Remove underline */
+}
+
+.footer-bottom a:hover {
+  text-decoration: underline;
+}
+
+.links-column {
+  flex: 1;
+  min-width: 200px;
+  margin-bottom: 20px;
+  margin-top: 40px;
+  margin-left: 40px;
+}
+
+.links-column h4 {
+  color: #FFCE00;
+  margin-bottom: 10px;
+  text-decoration: underline;
+  margin-left: 50px;
+  margin-top: 40px;
+  font-size: 18px;
+}
+
+.quick-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px; 
+  margin-left: 50px; 
+  
+  
+}
+
+.quick-links li {
+  margin: 0;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.quick-links a {
+  color: #ffffff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  
+}
+
+.quick-links a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+/* Existing styles remain unchanged */
+
+/* Responsive styles for tablets (iPad) and mobiles */
+
+@media (max-width: 1024px) {
+  .footer-row {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-column {
+    min-width: 100%; /* Full width columns */
+    margin-left: 0 !important; /* Override left margins */
+  }
+
+  .contact-column h4,
+  .links-column h4,
+  .footer-about h4,
+  .social-column h4 {
+    margin-left: 0 !important;
+  }
+
+  .quick-links {
+    margin-left: 0 !important;
+    align-items: center;
+  }
+
+  .quick-links li {
+    margin-top: 10px;
+  }
+
+  .contact-item {
+    margin-left: 0 !important;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .footer-logo {
+    width: 60%;
+    margin: 0 auto 20px auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-section {
+    padding: 10px 10px;
+  }
+
+  .footer-about p {
+    line-height: 1.5rem;
+    font-size: 14px;
+  }
+
+  .footer-bottom {
+    font-size: 12px;
+    padding: 5px 0;
+  }
+
+  .footer-logo {
+    width: 70%;
+  }
+
+  .contact-item span {
+    font-size: 13px;
+  }
+
+  .quick-links a {
+    font-size: 14px;
+  }
+
+  /* Optional: adjust icons size */
+  .contact-item svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+

@@ -1,0 +1,36 @@
+.featured-products {
+  padding: 40px;
+  text-align: center;
+}
+
+.product-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 items per row */
+  gap: 20px;
+  justify-items: center;
+}
+
+.product-wrapper {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+
+.product-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.product-info {
+  margin-top: 10px;
+}
+
+.product-name {
+  font-weight: bold;
+}
+
+.product-price {
+  color: #555;
+}

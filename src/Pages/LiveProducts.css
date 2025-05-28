@@ -1,0 +1,8 @@
+.live-products-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    color: #FEC107;
+}
+

@@ -1,0 +1,37 @@
+.floating-social-icons {
+  position: fixed;
+  top: 40%;
+  right: 20px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 999;
+  display: none;
+}
+
+.floating-social-icons a {
+  color: white;
+  padding: 10px;
+  font-size: 18px;
+  border-radius: 0 5px 5px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+/* Social brand colors */
+.facebook { background-color: #3b5998; }
+.instagram { background-color: #E1306C; }
+.twitter { background-color: #1DA1F2; }
+.youtube { background-color: #FF0000; }
+.whatsapp { background-color: #25D366; }
+.googleplus { background-color: #db4437; }
+.linkedin { background-color: #0077b5; }
+
+.floating-social-icons a:hover {
+  opacity: 0.8;
+  transform: scale(1.1);
+}

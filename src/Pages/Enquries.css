@@ -1,0 +1,47 @@
+.enquries-heading{
+    color: #FEC107;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.enquries-para{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.enquries-form{
+    margin-top: 60px;
+}
+
+.bread-banner img{
+    width: 100%;
+}
+
+.enquries-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 4rem;
+}
+
+.enquries-link-button {
+  padding: 14px 24px;
+  border: none;
+  background-color: #FEC107;
+  color: #ffffff;
+  border-radius: 0.5rem;
+  text-decoration: none; /* removes underline */
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+
+
+
