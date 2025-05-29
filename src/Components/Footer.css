@@ -181,9 +181,23 @@ width: 100vw; /* Full width of the viewport */
   text-decoration: underline;
 }
 
-/* Existing styles remain unchanged */
+/* Wave Top SVG Styling */
+.footer-wave-top {
+  position: relative;
+  /* top: -1px; */
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg); /* Flip to top */
+  z-index: 1;
+}
 
-/* Responsive styles for tablets (iPad) and mobiles */
+.footer-wave-top svg {
+  display: block;
+  width: 100%;
+  height: 80px;
+}
+
 
 @media (max-width: 1024px) {
   .footer-row {
@@ -195,7 +209,7 @@ width: 100vw; /* Full width of the viewport */
 
   .footer-column {
     min-width: 100%; /* Full width columns */
-    margin-left: 0 !important; /* Override left margins */
+    margin-left: 0 !important;
   }
 
   .contact-column h4,
@@ -252,8 +266,6 @@ width: 100vw; /* Full width of the viewport */
   .quick-links a {
     font-size: 14px;
   }
-
-  /* Optional: adjust icons size */
   .contact-item svg {
     width: 18px;
     height: 18px;

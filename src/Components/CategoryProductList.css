@@ -1,0 +1,22 @@
+.category-product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columns by default */
+  gap: 32px;
+  max-width: 1000px; /* Limit the total width */
+  margin: 0 auto;     /* Center the grid horizontally */
+  padding: 20px 30px; /* Add padding to top/bottom and left/right */
+}
+
+/* Medium screens (≥640px): 3 columns */
+@media (min-width: 640px) {
+  .category-product-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Large screens (≥768px): 4 columns */
+@media (min-width: 768px) {
+  .category-product-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

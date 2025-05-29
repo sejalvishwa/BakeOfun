@@ -37,7 +37,15 @@ export const Navigation = () => {
           >
             PRODUCTS <HiOutlineChevronDown className="arrow-icon" />
             <ul className="dropdown-menu">
-              <li>Bread & Buns</li>
+              <li>
+                <Link
+                  to="/bread"
+                  style={{ color: "white", textDecoration: "none" }}
+                >
+                  Bread & Buns
+                </Link>
+              </li>
+
               <li>Rusk/Toast</li>
               <li>Cakes & Muffins</li>
               <li>Cookies</li>
