@@ -11,13 +11,11 @@ import { homeProducts } from "../data/homeProducts";
 export const ProductDetail = () => {
   const { slug } = useParams();
 
-  // Try to find product in both arrays
   const fromHome = homeProducts.find((p) => p.slug === slug);
   const fromLive = products.find((p) => p.slug === slug);
 
   const product = fromHome || fromLive;
 
-  // Use recommendations only from the same source array
   const sameSource = fromHome ? homeProducts : products;
   const recommendations = sameSource.filter((p) => p.slug !== slug).slice(0, 4);
 
@@ -30,10 +28,7 @@ export const ProductDetail = () => {
       <div className="container my-5">
         <div className="row align-items-start">
           {/* Product Image */}
-          <div
-            className="col-md-6 mb-4"
-            style={{ overflow: "hidden", display: "inline-block" }}
-          >
+          <div className="col-md-6 mb-4" style={{ overflow: "hidden", display: "inline-block" }}>
             <img
               src={product.image}
               alt={product.name}
@@ -64,13 +59,19 @@ export const ProductDetail = () => {
                 src={zomatoLogo}
                 alt="Zomato"
                 className="me-3"
-                style={{width:"auto" , height: "40px" }}
+                style={{ width: "auto", height: "60px" }}
               />
               <img
                 src={swiggyLogo}
                 alt="Swiggy"
-                style={{ width:"auto" ,height: "40px" }}
+                style={{ width: "auto", height: "60px" }}
               />
+            </div>
+
+            {/* Product Description */}
+            <div className="product-description-section mt-4">
+              <h5 className="description-heading">Product Description :</h5>
+              <p className="product-description">{product.description}</p>
             </div>
           </div>
         </div>

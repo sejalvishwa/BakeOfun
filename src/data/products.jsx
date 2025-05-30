@@ -13,6 +13,7 @@ export const products = [
     price: "INR 300.00",
     image: pinappleCake,
     slug: "pineapple-cake",
+    description: "This is the pineapple cake"
   },
   {
     name: "Red Velvet Cake",

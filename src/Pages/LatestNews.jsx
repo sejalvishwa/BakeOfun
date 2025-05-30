@@ -135,7 +135,7 @@ export const LatestNews = () => {
 
         {/* News Grid */}
         <div className="news-section">
-          <h2>Recent News</h2>
+          <h2>Latest News</h2>
           <div className="news-grid">
             {filteredArticles.map((article) => (
               <div key={article.id} className="news-card">
@@ -164,16 +164,7 @@ export const LatestNews = () => {
       </div>
 
       {/* Newsletter Section */}
-      <div className="newsletter-section">
-        <div className="newsletter-content">
-          <h2>Stay Updated with BakeOFun</h2>
-          <p>Subscribe to our newsletter and never miss the latest news, promotions, and delicious updates.</p>
-          <div className="newsletter-form">
-            <input type="email" placeholder="Enter your email address" className="email-input" />
-            <button className="subscribe-btn">Subscribe</button>
-          </div>
-        </div>
-      </div>
+      
     </div>
     <Footer/>
     </>

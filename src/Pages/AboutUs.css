@@ -1,17 +1,33 @@
-.yellow-bar {
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
+.yellow-border {
+  width: 100vw; /* Full viewport width */
+  position: relative;
+  left: 0;
+  right: 0;
+  margin-left: 1rem;
+}
+
+.the-brand{
+  margin-bottom: 2rem;
+}
+
+
+.Banner-image img{
   width: 100%;
-  height: 50px;
-  background-color: #ffc107;
-  margin-top: 70px;
+  height: 35rem;
 }
 
 .logo {
   text-align: left;
-  padding-left: 30px; /* Optional: adds space from the left edge */
+  padding-left: 50px; 
 }
 
 .logo img {
-  margin-top: 18rem;
+  margin-top: 3.5rem;
   width: 100%;
   max-width: 400px; /* Limit max size if needed */
 }

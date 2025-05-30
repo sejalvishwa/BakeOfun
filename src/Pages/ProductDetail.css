@@ -11,6 +11,7 @@
 
 .share-section {
   margin-top: 2rem;
+  margin-left: 1rem;
 }
 
 .availability img {
@@ -39,22 +40,51 @@
 
 
 .product-info h2 {
-  margin-bottom: 1.75rem;
+  margin-bottom: 0.45rem;
+  margin-left: 1rem;
 }
 
 .price {
     font-size: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 0.75rem;
     display: block;
-   
+    margin-left: 1rem;
 }
 
 
 .product-info .availability img {
   height: 40px;
-  margin-right: 1rem;
+ 
 }
 
+
 .availability h5 {
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.45rem;
+  margin-top: -1.5rem;
+  margin-left: 1rem;
+ 
+}
+
+.product-description {
+  margin-top: 1rem;
+  margin-left: 1rem;
+  font-size: 1rem;
+  color: #444;
+  line-height: 1.6;
+}
+
+.product-description-section {
+  margin-top: 2rem;
+}
+
+.description-heading {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #222;
+}
+
+.product-description {
+  font-size: 1rem;
+  color: #444;
+  line-height: 1.6;
 }
