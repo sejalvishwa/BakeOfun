@@ -64,7 +64,7 @@ export const Home = () => {
       <div className="banner-container">
         <img src={bannerImage} alt="BakeOfun Banner" className="banner-img" />
         <div className="banner-bottom">
-          <button className="shop-button">SHOP NOW</button>
+          <a href="#"><button className="shop-button">SHOP NOW</button></a>
         </div>
 
         <AboutUsSection
@@ -79,7 +79,6 @@ export const Home = () => {
         <div className="our-focus-section">
           <h1>OUR FOCUS : GOOD WORK</h1>
         </div>
-
         <div className="why-choose-us">
           <div className="feature-card">
             <img src={machineryIcon} alt="Advanced Plant and Machinery" />
@@ -98,7 +97,6 @@ export const Home = () => {
         <div className="our-focus-section">
           <h1>OUR FORTE...</h1>
            <OurForte items={forte} />
-
         <div className="our-presence-section">
           <h1>Our Presence</h1>
           <div className="our-presence-logos">
