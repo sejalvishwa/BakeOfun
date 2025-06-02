@@ -186,7 +186,7 @@ line-height: 1.6;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 30px;
   padding: 40px 60px; 
-  background-image: url('../assets/images/BakeOfun-Bg.jpg');
+  background-image: url('../assets/images/ourfortebanner.jpg');
   background-size: cover;
   margin-top: 60px;
   width: 100vw;
@@ -220,11 +220,11 @@ line-height: 1.6;
 
 .forte-items h3 {
   margin: 10px 0;
-  color: #2C2C93;
+  color: #dfdddd;
 }
 
 .forte-items p {
-  color: #000000;
+  color: #1b1b1b;
   font-size: 14px;
   font-weight: 600;
 }

@@ -6,6 +6,7 @@ import { LatestNews } from "./Pages/LatestNews";
 import { LiveProducts } from "./Pages/LiveProducts";
 import { ProductDetail } from "./Pages/ProductDetail";
 import {BreadPage} from "./Pages/BreadPage";
+import {NewsDetails} from "./Components/NewsDetails";
 
 
 import {FloatingSocialIcons} from "./Components/FloatingSocialIcons";
@@ -22,6 +23,7 @@ export const App = () => {
         <Route path="/latestnews" element={<LatestNews />} />
          <Route path="/product/:slug" element={<ProductDetail />} />
           <Route path="/bread" element={<BreadPage />} />
+         <Route path="/news/:id" element={<NewsDetails />} />
         <Route path="*" element={<Navigate to="/home" replace />} />
       </Routes>
     </Router>

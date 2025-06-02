@@ -8,7 +8,7 @@ import logo from "../assets/images/about-logo-2.png";
 import breadImage from "../assets/images/bread-img-2.png";
 import smallBadge from "../assets/images/small-badge.png";
 import retailBakery from "../assets/images/retailbakery.png";
-import BigBadge from "../assets/images/BigBadge.png";
+import BigBadge from "../assets/images/social-reach.png";
 import Banner from "../assets/images/About-Us Banner.png";
 import YellowBorder from "../assets/images/yellow-border.png";
 import { AboutUsSection } from "../Components/AboutUsSection";
@@ -16,12 +16,18 @@ import { useState } from "react";
 
 export const AboutUs = () => {
 
-    const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
-  const toggleReadMore = () => {
+  const toggleReadMoreBrand = () => {
     setExpanded(!expanded);
   };
 
+  const toggleReadMorePlant = () => {
+    setIsExpanded(!isExpanded);
+  };
+
+  const toggleExpand = () => setExpanded(!expanded);
   
 
   const aboutContent = [
@@ -77,15 +83,12 @@ export const AboutUs = () => {
             </p>
           </div>
 
-          {/* READ MORE SECTION */}
           {!expanded ? (
             <>
               <p>
                 We believe that the ‘Food Business’ is one of the vital industries involving highly meticulous tasks...
               </p>
-              <button className="btn btn-link p-0" onClick={toggleReadMore}>
-                Read More
-              </button>
+              <button className="btn btn-link p-0 pb-4" onClick={toggleReadMoreBrand}>Read More</button>
             </>
           ) : (
             <>
@@ -109,7 +112,7 @@ export const AboutUs = () => {
                 family members—young or seniors. We also use cautious amount of salt, sugar & additives in all our
                 production recipes.
               </p>
-              <button className="btn btn-link p-0" onClick={toggleReadMore}>
+              <button className="btn btn-link p-0 pb-5" onClick={toggleReadMoreBrand}>
                 Read Less
               </button>
             </>
@@ -117,124 +120,134 @@ export const AboutUs = () => {
         </div>
       </div>
     </div>
+    </div>
       <div className="yellow-bar"></div>
 
-      <div className="container-fluid">
-        <div className="row align-items-center mt-5" style={{ backgroundColor: "#F2E6EE" }} >
-          <div className="col-md-6">
-          <div>
-              <div className="our-plant">
-                <h2>Our Plant, Men & Technology</h2>
-              </div>
+      <div className="container-fluid m-0 ">
+         <div className="row align-items-center p-5" style={{ backgroundColor: "#F2E6EE" }}>
+      <div className="col-md-7">
+        <div>
+          <div className="our-plant">
+            <h2>Our Plant, Men & Technology</h2>
+          </div>
 
-              <div className="plant-para-section">
-                <div className="manuacturing-unit-para">
-                  <p>
-                    Our manufacturing unit is located in clean environment in
-                    the outskirts of Raipur with abundance of fresh water. This
-                    water is further treated with R.O. System before processing.
-                  </p>
-                </div>
+          <div className="plant-para-section">
+            <div className="manuacturing-unit-para">
+              <p>
+                Our manufacturing unit is located in clean environment in the
+                outskirts of Raipur with abundance of fresh water. This water is
+                further treated with R.O. System before processing.
+              </p>
+            </div>
 
-                <div className="manuacturing-unit-para">
-                  <p>
-                    The Factory Building is built with special care to fully
-                    comply with globally recognized Food Safety Standards.{" "}
-                  </p>
-                </div>
+            <div className="manuacturing-unit-para">
+              <p>
+                The Factory Building is built with special care to fully comply
+                with globally recognized Food Safety Standards.
+              </p>
+            </div>
 
+            {isExpanded && (
+              <>
                 <div className="manuacturing-unit-para">
                   <p>
                     Our Modern Plant Machinery is automated to minimize human
-                    hands’ interaction to ensure zero foreign matter
-                    contamination. The installed production capacity of our
-                    plant is 150 MT per month.
+                    hands’ interaction to ensure zero foreign matter contamination.
+                    The installed production capacity of our plant is 150 MT per month.
                   </p>
                 </div>
 
                 <div>
                   <p>
-                    Our Plant is not only compliant with statutory Food Safety
-                    Norms like FSSAI but also supplementary FSMS like ISO:22000
-                    & HACCP.{" "}
+                    Our Plant is not only compliant with statutory Food Safety Norms
+                    like FSSAI but also supplementary FSMS like ISO:22000 & HACCP.
                   </p>
                 </div>
 
                 <div>
                   <p>
-                    Our Workforce : Every person involved with us is trained to
+                    Our Workforce: Every person involved with us is trained to
                     be inculcated with the idea of Fresh & Clean Food that
                     ‘BakeOFun’ is meant for.
                   </p>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-6">
-            <div className="breadImage">
-              <img src={breadImage} />
-            </div>
+              </>
+            )}
+            <button className="btn btn-link p-0 mt-2" onClick={toggleReadMorePlant}>
+              {isExpanded ? "Read Less" : "Read More"}
+            </button>
           </div>
         </div>
+      </div>
+
+      <div className="col-md-5">
+        <div className="breadImage">
+          <img src={breadImage} alt="Bread" />
+        </div>
+      </div>
+    </div>
       </div>
       <div className="yellow-bar"></div>
 
       <div className="container-fluid our-reach-main">
-        <div className="row align-items-center mt-5" style={{ backgroundColor: "#F9EDEB" }}>
-          <div className="col-6 BigBadge">
-          <img src={BigBadge} />
+      <div className="row align-items-center mt-5" style={{ backgroundColor: "#F9EDEB" }}>
+        <div className="col-6 BigBadge">
+          <img src={BigBadge} alt="Big Badge" className="img-fluid" />
+        </div>
+
+        <div className="col-6">
+          <div className="Our-reach-heading">
+            <h2>Our Reach</h2>
           </div>
-           
-          <div class="col-6 ">
-             <div className="Our-reach-heading">
-              <h2>Our Reach</h2>
-            </div>
 
-            <div className="our-reach-para1">
-              <p>
-                Our ‘Bake O Fun’ products are not only delectable & tempting,
-                but our brand epitomizes trust & reliance. Today ‘BakeOFun’ is
-                recognised as a Trusted Food Brand by thousands of our valued
-                consumers.
-              </p>
-            </div>
+          <div className="our-reach-para1">
+            <p>
+              Our ‘Bake O Fun’ products are not only delectable & tempting,
+              but our brand epitomizes trust & reliance. Today ‘BakeOFun’ is
+              recognised as a Trusted Food Brand by thousands of our valued
+              consumers.
+            </p>
+          </div>
 
-            <div>
-              <div class="container">
-                <div class="row">
-                  <div class="col-3">
+          {/* Expandable Section */}
+          {expanded && (
+
+            <>
+              <div className="container">
+                <div className="row">
+                  <div className="col-3">
                     <div className="smallBadge">
-                      <img src={smallBadge} />
+                      <img src={smallBadge} alt="Small Badge" className="img-fluid" />
                     </div>
                   </div>
-                  <div class="col-9 reach-recognition">
+                  <div className="col-9 reach-recognition">
                     <h4>REACH & RECOGNITION</h4>
                     <p>
                       We cater to more than 1500 retail outlets daily through
                       our robust dealer & distributor network across
                       Chhattisgarh & parts of Odisha. Our products are also
                       approved and sold by Modern trade giants like Dmart,
-                      Walmart, Reliance retail & Big Basket.{" "}
+                      Walmart, Reliance retail & Big Basket.
                     </p>
                     <p>
                       Brand - ‘Bake O Fun’ is approved by South Eastern Central
-                      Railways (Indian Railways) for products supply at all
+                      Railways (Indian Railways) for product supply at all
                       static catering units at SECR stations.
                     </p>
                   </div>
                 </div>
               </div>
 
-              <hr></hr>
+              <hr />
 
-              <div class="container">
-                <div class="row">
-                  <div class="col-3">
+              <div className="container">
+                <div className="row">
+                  <div className="col-3">
                     <div className="smallBadge">
-                      <img src={retailBakery} />
+                      <img src={retailBakery} alt="Retail Bakery" className="img-fluid" />
                     </div>
                   </div>
-                  <div class="col-9 reach-recognition">
+                  <div className="col-9 reach-recognition">
                     <h4>RETAIL BAKERY</h4>
                     <p>
                       Our company operates two Premium Retail Bakery Outlets
@@ -243,11 +256,16 @@ export const AboutUs = () => {
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          </div>
+            </>
+          )}
+
+          <button className="btn btn-link p-0 pb-5 mt-2" onClick={toggleExpand}>
+            {expanded ? "Read Less" : "Read More"}
+          </button>
         </div>
       </div>
+    </div>
+     
 
       <Footer />
     </>

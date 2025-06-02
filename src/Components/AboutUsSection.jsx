@@ -22,7 +22,7 @@ export const AboutUsSection = ({
 
       {showLearnMore && (
         <div className="learn-more-btn">
-          <button onClick={onLearnMoreClick}>Learn More</button>
+          <a href="/about"><button onClick={onLearnMoreClick}>Learn More</button></a>
         </div>
       )}
     </div>

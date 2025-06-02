@@ -1,9 +1,8 @@
 import "./Home.css";
 import { Navigation } from "../Components/Navigation";
-import { ContactUs } from "../Components/ContactUs";
 import { Footer } from "../Components/Footer";
 import { FeaturedProducts } from "../Components/FeaturedProducts";
-import bannerImage from "../assets/images/Banner.png";
+import bannerImage from "../assets/images/Banner-main.jpg";
 import machineryIcon from "../assets/images/machinery.png";
 import workforceIcon from "../assets/images/workforce.png";
 import foodSafetyIcon from "../assets/images/foodsafety.png";
@@ -18,6 +17,8 @@ import bigbasketImage from "../assets/images/bigbasket.png";
 import indianrailwayImage from "../assets/images/indianrailways.png";
 import { AboutUsSection } from "../Components/AboutUsSection";  
 import { homeProducts } from "../data/homeProducts";
+import BakeryBanner from "../Components/BakeryBanner";
+import {OurForte} from "../Components/OurForte";
 
 const aboutUsTitle = "A Li'l bit About Us";
 
@@ -96,16 +97,7 @@ export const Home = () => {
 
         <div className="our-focus-section">
           <h1>OUR FORTE...</h1>
-          <div className="our-forte-section">
-            {forte.map((item, idx) => (
-              <div className="forte-items" key={idx}>
-                <img src={item.icon} alt={item.title} />
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+           <OurForte items={forte} />
 
         <div className="our-presence-section">
           <h1>Our Presence</h1>
@@ -117,25 +109,9 @@ export const Home = () => {
             <img src={relianceImage} alt="Reliance" />
           </div>
         </div>
+        </div>
 
-        <ContactUs
-          mapSrc="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3718.3505874802427!2d81.65115787394123!3d21.257585679882396!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a28dd7a16c9107f%3A0xac3933ec40743ead!2sBakeOFun%20Bake%20Cafe!5e0!3m2!1sen!2sin!4v1747913432030!5m2!1sen!2sin"
-          stores={[
-            {
-              title: "Retail Store 1",
-              address: `BakeOFun Bake Cafe,
-Gurukripa Complex, Pandri Main Road, Near Mandi Gate - Ram Mandir Rd - Raipur, Chhattisgarh 492003`,
-              phone: "+91 0771 490 1599"
-            },
-            {
-              title: "Retail Store 2",
-              address: `BakeOFun Bake Cafe,
-Opp. Universal Electronics, near Vidya Hospital Shankar Nagar Main Road, Raipur, Chhattisgarh 492007`,
-              phone: "+91 0771 400 4599"
-            }
-          ]}
-        />
-
+      <BakeryBanner/>
         <Footer />
       </div>
     </>
