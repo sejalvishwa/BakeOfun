@@ -1,28 +1,67 @@
-.product-detail {
-  padding: 2rem;
-  text-align: center;
+.product-info {
+  display: flex ;
+  flex-direction:column;
+  padding-right: 14rem !important;
 }
 
-.product-image {
-  width: 200px;
-  height: auto;
-  border-radius: 10px;
+.product-header h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.product-header .price {
+  font-size: 1.25rem;
+  color: #888;
 }
 
 .share-section {
-  margin-top: 2rem;
-  margin-left: 1rem;
+  display: flex;
+  gap: 1px;
+  margin-right: 8rem !important;
 }
 
-.availability img {
-  width: 100px;
-  margin: 0 1rem;
+.availability h5 {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  margin-right: 6rem !important;
 }
 
-.you-may-also-like {
-  margin-top: 3rem;
+.platform-logos {
+  display: flex;
+  gap: 20px;
+  align-items: center;
 }
 
+.platform-logos img {
+  height: 90px;
+  transition: transform 0.2s ease;
+}
+
+.platform-logos img:hover {
+  transform: scale(1.05);
+}
+
+.product-description-section {
+  margin-top: 1.5rem;
+  margin-right: 3rem;
+}
+
+.description-heading {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.product-description {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+
+
+/* Zoom effect */
 .zoom-container {
   overflow: hidden;
   display: inline-block;
@@ -35,56 +74,8 @@
 
 .zoom-on-hover:hover {
   transform: scale(1.2);
-  z-index: 10;
 }
 
-
-.product-info h2 {
-  margin-bottom: 0.45rem;
-  margin-left: 1rem;
-}
-
-.price {
-    font-size: 1rem;
-    margin-bottom: 0.75rem;
-    display: block;
-    margin-left: 1rem;
-}
-
-
-.product-info .availability img {
-  height: 40px;
- 
-}
-
-
-.availability h5 {
-  margin-bottom: 0.45rem;
-  margin-top: -1.5rem;
-  margin-left: 1rem;
- 
-}
-
-.product-description {
-  margin-top: 1rem;
-  margin-left: 1rem;
-  font-size: 1rem;
-  color: #444;
-  line-height: 1.6;
-}
-
-.product-description-section {
-  margin-top: 2rem;
-}
-
-.description-heading {
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: #222;
-}
-
-.product-description {
-  font-size: 1rem;
-  color: #444;
-  line-height: 1.6;
+.you-may-also-like {
+  margin-top: 3rem;
 }

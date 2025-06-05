@@ -3,16 +3,18 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css"; 
 import "./Carousel.css";
 
-export const Carousel = ({ slides }) => {
+
+
+export const Carousel = ({ slides = [] }) => {
   const settings = {
- dots: true,
-  arrows: true,
-  infinite: true,
-  speed: 500,
-  autoplay: true,
-  autoplaySpeed: 2000,
-  slidesToShow: 1,
-  slidesToScroll: 1,
+    dots: true,
+    arrows: true,
+    infinite: true,
+    speed: 500,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    slidesToShow: 1,
+    slidesToScroll: 1,
   };
 
   return (
@@ -27,3 +29,4 @@ export const Carousel = ({ slides }) => {
     </div>
   );
 };
+

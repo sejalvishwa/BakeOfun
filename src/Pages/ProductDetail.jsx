@@ -13,7 +13,6 @@ export const ProductDetail = () => {
 
   const fromHome = homeProducts.find((p) => p.slug === slug);
   const fromLive = products.find((p) => p.slug === slug);
-
   const product = fromHome || fromLive;
 
   const sameSource = fromHome ? homeProducts : products;
@@ -28,15 +27,14 @@ export const ProductDetail = () => {
       <div className="container my-5">
         <div className="row align-items-start">
           {/* Product Image */}
-          <div className="col-md-6 mb-4" style={{ overflow: "hidden", display: "inline-block" }}>
+          <div className="col-md-6 mb-4 zoom-container">
             <img
               src={product.image}
               alt={product.name}
-              className="img-fluid rounded"
+              className="img-fluid rounded zoom-on-hover"
               style={{
                 maxWidth: "70%",
                 height: "auto",
-                transition: "transform 0.3s ease",
                 cursor: "zoom-in",
               }}
               onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.2)")}
@@ -44,32 +42,26 @@ export const ProductDetail = () => {
             />
           </div>
 
-          {/* Product Details */}
+          {/* Product Info */}
           <div className="col-md-6 product-info">
-            <h2>{product.name}</h2>
-            <p className="text-muted price">{product.price}</p>
-
-            <div className="share-section mt-3">
-              <button className="btn btn-outline-primary me-2">Share</button>
+            <div className="product-header">
+              <h2>{product.name}</h2>
+              <p className="price">{product.price}</p>
             </div>
 
-            <div className="availability mt-5">
+            <div className="share-section">
+              <button className="btn btn-outline-primary">Share</button>
+            </div>
+
+            <div className="availability mt-4">
               <h5>Available on:</h5>
-              <img
-                src={zomatoLogo}
-                alt="Zomato"
-                className="me-3"
-                style={{ width: "auto", height: "60px" }}
-              />
-              <img
-                src={swiggyLogo}
-                alt="Swiggy"
-                style={{ width: "auto", height: "60px" }}
-              />
+              <div className="platform-logos">
+                <img src={zomatoLogo} alt="Zomato" />
+                <img src={swiggyLogo} alt="Swiggy" />
+              </div>
             </div>
 
-            {/* Product Description */}
-            <div className="product-description-section mt-4">
+            <div className="product-description-section mt-5 ">
               <h5 className="description-heading">Product Description :</h5>
               <p className="product-description">{product.description}</p>
             </div>
@@ -80,7 +72,7 @@ export const ProductDetail = () => {
         <hr className="my-5" />
         <div className="you-may-also-like">
           <h2 className="mb-4">You May Also Like</h2>
-          <FeaturedProducts products={recommendations} showTitle={false} />
+          <FeaturedProducts products={recommendations} showTitle={false} showPrice={true} />
         </div>
       </div>
 

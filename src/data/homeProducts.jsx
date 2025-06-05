@@ -6,7 +6,7 @@ import chocoSilkImage from "../assets/images/chocosilk.jpg";
 
 export const homeProducts = [
   {
-    name: "Bakeofun Dry Fruit Temptation Cookies",
+    name: "Bakeofun Dry Fruit Cookies",
     price: "INR 120.01",
     image: dryfruitImage ,
     slug: "dryfruitcookies",

@@ -12,11 +12,12 @@ export const LiveProducts = () => {
         <>
        <Navigation />
 
-       <div className="live-products-header">
-        <h2>Live Products</h2>
-       </div>
+      <div className="live-products-header" style={{ display: "flex", justifyContent: "center", alignItems: "center", marginTop: "30px", color: "#FEC107" }}>
+  <h2>Live Products</h2>
+</div>
 
-      <FeaturedProducts products={products} showTitle={false} />
+
+      <FeaturedProducts products={products} showTitle={false} showPrice={true} />
 
 
        <Footer/>

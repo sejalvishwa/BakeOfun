@@ -3,6 +3,30 @@ body, html {
   padding: 0;
 }
 
+.about-us-page {
+  background-image: url('../assets/images/AboutUsborder.png'); /* 🔁 Replace with your actual background image path */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh; /* You can change to 70vh or auto depending on content */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  margin-top: -10px;
+}
+
+.about-us-text {
+  max-width: 75%;     /* Responsive size */
+  height: auto;
+  object-fit: contain;
+
+}
+
+.plant-section{
+  margin-top: -2rem;
+}
+
 .yellow-border {
   width: 100vw; /* Full viewport width */
   position: relative;
@@ -75,6 +99,7 @@ font-weight: 600;
 
 .our-reach-main{
   margin-bottom: 4rem;
+  margin-top: -3rem;
 }
 
 .Our-reach-heading h2{
@@ -101,8 +126,8 @@ font-weight: 600;
 }
 
 .BigBadge img{
-  margin-left: 8rem;
-  width: 50%;
+  /* margin-left: rem; */
+  width: 100%;
   padding: 2rem;
 }
 

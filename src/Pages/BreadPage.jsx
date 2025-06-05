@@ -72,3 +72,4 @@ export const BreadPage = () => {
 };
 
 export default BreadPage;
+

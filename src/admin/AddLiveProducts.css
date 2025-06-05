@@ -1,0 +1,45 @@
+.platform-group {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+  background-color: #fafafa;
+  position: relative;
+}
+
+.platform-group input {
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.platform-group img.preview-logo {
+  margin-top: 8px;
+  max-height: 60px;
+  display: block;
+}
+
+.platform-group .btn-danger {
+  margin-top: 10px;
+}
+
+.platform-group:not(:last-child)::after {
+  content: "";
+  display: block;
+  margin-top: 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+.form-column > .form-label {
+  font-weight: 600;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.btn-secondary.btn-sm:hover {
+  background-color: #f0a80c;
+  color: inherit;
+  opacity: 1;
+  box-shadow: none;
+  transform: none;
+}
+

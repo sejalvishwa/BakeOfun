@@ -20,41 +20,48 @@ export const products = [
     price: "INR 800.00",
     image: redVelvetCake,
     slug: "red-velvet-cake",
+    description: "This is the Red Velvet cake"
   },
   {
     name: "White Forest Cake",
     price: "INR 500.00",
     image: whiteForestCake,
     slug: "white-forest-cake",
+    description: "This is the White Forest cake"
   },
   {
     name: "Bento Cake",
     price: "INR 300.00",
     image: bentoCake,
     slug: "bento-cake",
+    description: "This is the bento cake"
   },
   {
     name: "Rasmalai Cake",
     price: "INR 700.00",
     image: rasmalaiCake,
     slug: "rasmalai-cake",
+     description: "This is the rasmalai cake"
   },
   {
     name: "Red Velvet Pastry",
     price: "INR 80.00",
     image: redvelvetPastry,
     slug: "red-velvet-pastry",
+     description: "This is the red velvet pastry"
   },
   {
     name: "Pineapple Pudding",
     price: "INR 70.00",
     image: pineapplePudding,
     slug: "pineapple-pudding",
+     description: "This is the pinapple pudding"
   },
   {
     name: "Pineapple Pastry",
     price: "INR 70.00",
     image: pineapplePastry,
     slug: "pineapple-pastry",
+     description: "This is the pineapple pastry"
   },
 ];

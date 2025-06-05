@@ -1,7 +1,7 @@
 import "./FeaturedProducts.css";
 import { Link } from "react-router-dom";
 
-export const FeaturedProducts = ({ products, showTitle = true }) => {
+export const FeaturedProducts = ({ products, showTitle = true, showPrice = false }) => {
   return (
     <div className="featured-products">
       {showTitle && <h1>Featured Products</h1>}
@@ -11,9 +11,9 @@ export const FeaturedProducts = ({ products, showTitle = true }) => {
             <div className="product-card">
               <img src={product.image} alt={product.name} />
             </div>
-            <div className="product-info">
-              <p className="product-name">{product.name}</p>
-              <p className="product-price">{product.price}</p>
+            <div className="product-info-website">
+              <p className="product-name-website">{product.name}</p>
+              {showPrice && <p className="product-price-website">{product.price}</p>}
             </div>
           </Link>
         ))}
@@ -21,4 +21,3 @@ export const FeaturedProducts = ({ products, showTitle = true }) => {
     </div>
   );
 };
-

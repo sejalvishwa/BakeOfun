@@ -11,7 +11,7 @@ export const BakeryBanner = () => {
               <br />
               Daily Delight
             </h1>
-            <p className="bakery-subtitle">Handcrafted Made With Love</p>
+           
             <div className="underline"></div>
           </div>
 
@@ -19,9 +19,7 @@ export const BakeryBanner = () => {
             <div className="highlight-box">
               <h2 className="highlight-title">Taste the BakeOfun Difference</h2>
               <p className="highlight-text">
-                From artisan breads to decadent pastries, our bakery offers the freshest,
-                most delicious treats in town. Made from scratch daily using premium
-                ingredients for that perfect bite every time.
+            Fresh artisan breads and pastries made daily with premium ingredients for the perfect bite.
               </p>
               <a href="/enquries" className="contact-button">
                 Contact Us

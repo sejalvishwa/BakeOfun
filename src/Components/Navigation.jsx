@@ -20,7 +20,7 @@ export const Navigation = () => {
   return (
     <nav className="navbar">
       <div className="navbar-logo">
-        <a href="#">
+        <a href="/">
           <img src={logo} alt="Logo" className="logo" />
         </a>
       </div>
@@ -36,7 +36,7 @@ export const Navigation = () => {
             onClick={toggleDropdown}
           >
             PRODUCTS <HiOutlineChevronDown className="arrow-icon" />
-            <ul className="dropdown-menu">
+            <ul className="dropdown-menu-website">
               <li>
                 <Link
                   to="/bread"

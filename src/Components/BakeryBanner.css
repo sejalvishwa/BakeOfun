@@ -8,11 +8,11 @@
 
 .bakery-banner-bg {
   background: linear-gradient(to bottom, #f59e0b, #fbbf24, #f97316);
-  padding: 4rem 0;
+  padding: 2rem 0;
 }
 
 .bakery-banner-container {
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 0 1.5rem;
   display: flex;
