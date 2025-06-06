@@ -14,15 +14,64 @@ import BurgerBread from "../assets/images/burger-bread.jpg";
 import AttaBread from "../assets/images/atta-bread.jpg";
 
 const initialBreadProducts = [
-  { name: "Bakeofun Premium Bread", price: 45, image: PremiumBread },
-  { name: "Bakeofun Brown Bread", price: 50, image: BrownBread },
-  { name: "Bakeofun Milk Bread", price: 50, image: MilkBread },
-  { name: "Bakeofun Multigrain Bread", price: 60, image: MultigrainBread },
-  { name: "Bakeofun Paw", price: 30, image: PawBread },
-  { name: "Bakeofun Family Bread", price: 70, image: FamilyBread },
-  { name: "Bakeofun Til Burger Buns", price: 30, image: BurgerBread },
-  { name: "Bakeofun Atta Bread", price: 55, image:AttaBread },
+  {
+    name: "Bakeofun Premium Bread",
+    price: 45,
+    image: PremiumBread,
+    slug: "premium-bread",
+    description: "Soft and fluffy white bread perfect for sandwiches.",
+  },
+  {
+    name: "Bakeofun Brown Bread",
+    price: 50,
+    image: BrownBread,
+    slug: "brown-bread",
+    description: "Healthier brown bread rich in fiber and nutrients.",
+  },
+  {
+    name: "Bakeofun Milk Bread",
+    price: 50,
+    image: MilkBread,
+    slug: "milk-bread",
+    description: "Sweet and soft milk bread ideal for toasts and snacks.",
+  },
+  {
+    name: "Bakeofun Multigrain Bread",
+    price: 60,
+    image: MultigrainBread,
+    slug: "multigrain-bread",
+    description: "Made with multiple grains, a healthy choice for breakfast.",
+  },
+  {
+    name: "Bakeofun Paw",
+    price: 30,
+    image: PawBread,
+    slug: "paw-bread",
+    description: "Mini paw-shaped bread, soft and perfect for kids.",
+  },
+  {
+    name: "Bakeofun Family Bread",
+    price: 70,
+    image: FamilyBread,
+    slug: "family-bread",
+    description: "Larger loaf suitable for family meals.",
+  },
+  {
+    name: "Bakeofun Til Burger Buns",
+    price: 30,
+    image: BurgerBread,
+    slug: "til-burger-buns",
+    description: "Soft burger buns topped with sesame seeds.",
+  },
+  {
+    name: "Bakeofun Atta Bread",
+    price: 55,
+    image: AttaBread,
+    slug: "atta-bread",
+    description: "Whole wheat atta bread for a nutritious meal.",
+  },
 ];
+
 
 export const BreadPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -70,6 +119,6 @@ export const BreadPage = () => {
     </>
   );
 };
-
+;
+export { initialBreadProducts };
 export default BreadPage;
-

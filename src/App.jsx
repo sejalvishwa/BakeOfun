@@ -5,6 +5,7 @@ import { Enquries } from "./Pages/Enquries";
 import { LatestNews } from "./Pages/LatestNews";
 import { LiveProducts } from "./Pages/LiveProducts";
 import { ProductDetail } from "./Pages/ProductDetail";
+import {BreadProductDetail} from "./Pages/BreadProductDetail";
 import {BreadPage} from "./Pages/BreadPage";
 import {NewsDetails} from "./Components/NewsDetails";
 import {FloatingSocialIcons} from "./Components/FloatingSocialIcons";
@@ -33,6 +34,7 @@ export const App = () => {
         <Route path="/latestnews" element={<LatestNews />} />
         <Route path="/product/:slug" element={<ProductDetail />} />
         <Route path="/bread" element={<BreadPage />} />
+         <Route path="/bread/:slug" element={<BreadProductDetail />} />
         <Route path="/news/:id" element={<NewsDetails />} />
         
         {/* Default Route */}
