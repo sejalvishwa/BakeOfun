@@ -1,10 +1,10 @@
 import "./AboutUsSection.css"; // optional CSS file for styling
 
-export const AboutUsSection = ({ 
-  title, 
-  paragraphs, 
-  showLearnMore = false, 
-  onLearnMoreClick 
+export const AboutUsSection = ({
+  title,
+  paragraphs,
+  showLearnMore = false,
+  onLearnMoreClick,
 }) => {
   return (
     <div className="about-us-section">
@@ -12,17 +12,29 @@ export const AboutUsSection = ({
 
       {paragraphs.map((para, index) => (
         <p key={index}>
-          {para.map((line, i) => 
-            typeof line === "string" 
-              ? line 
-              : <span key={i} className="center-line">{line}</span>
-          ).reduce((prev, curr, j) => [prev, <br key={`br-${index}-${j}`} />, curr])}
+          {para
+            .map((line, i) =>
+              typeof line === "string" ? (
+                line
+              ) : (
+                <span key={i} className="center-line">
+                  {line}
+                </span>
+              )
+            )
+            .reduce((prev, curr, j) => [
+              prev,
+              <br key={`br-${index}-${j}`} />,
+              curr,
+            ])}
         </p>
       ))}
 
       {showLearnMore && (
         <div className="learn-more-btn">
-          <a href="/about"><button onClick={onLearnMoreClick}>Learn More</button></a>
+          <a href="/about">
+            <button onClick={onLearnMoreClick}>Learn More</button>
+          </a>
         </div>
       )}
     </div>

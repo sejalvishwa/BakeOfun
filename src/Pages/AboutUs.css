@@ -3,12 +3,12 @@ body, html {
   padding: 0;
 }
 
-.about-us-page {
-  background-image: url('../assets/images/AboutUsborder.png'); /* 🔁 Replace with your actual background image path */
+/* .about-us-page {
+  background-image: url('../assets/images/AboutUsborder.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: 100vh; /* You can change to 70vh or auto depending on content */
+  height: 100vh; 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,11 +17,57 @@ body, html {
 }
 
 .about-us-text {
-  max-width: 75%;     /* Responsive size */
+  max-width: 75%;  
   height: auto;
   object-fit: contain;
 
-}
+} */
+
+ .about-section {
+            padding: 80px 0;
+            background-color: #F8F8F8;
+            margin-top: -1rem;
+        }
+        
+        .about-title {
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: #10256F;
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+        
+        .about-subtitle {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 3rem;
+        }
+        
+        .about-text {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #4b5563;
+            margin-bottom: 1.5rem;
+        }
+        
+        .about-content {
+            max-width: 700px;
+        }
+        
+        @media (max-width: 768px) {
+            .about-title {
+                font-size: 2.5rem;
+            }
+            
+            .about-subtitle {
+                font-size: 1.25rem;
+            }
+            
+            .about-text {
+                font-size: 1rem;
+            }
+        }
 
 .plant-section{
   margin-top: -2rem;
@@ -53,7 +99,7 @@ body, html {
 .logo img {
   margin-top: 3.5rem;
   width: 100%;
-  max-width: 400px; /* Limit max size if needed */
+  max-width: 400px; 
 }
 
 
@@ -61,6 +107,10 @@ body, html {
     margin-top: 70px;
     color: #2C2C93;
     font-size: 28px;
+}
+
+.about-logo-section{
+  margin-right: 4rem;
 }
 
 .trusted-para p{
@@ -86,7 +136,7 @@ body, html {
 
 .our-plant h2{
   color: #ffc107;
-  margin-top: 100px;
+  margin-top: 30px;
 }
 
 .plant-para-section{
@@ -105,6 +155,10 @@ font-weight: 600;
 .Our-reach-heading h2{
   margin-top: 60px;
   color: #2C2C93;
+}
+
+.reach-section{
+ padding-left: 80px;
 }
 
 .our-reach-para1{
@@ -153,14 +207,16 @@ font-weight: 600;
   .breadImage {
     margin-top: 40px;
     text-align: center;
+
   }
 
   .breadImage img {
     width: 3rem;
+   
   }
 
   .our-plant h2 {
-    margin-top: 50px;
+    margin-top: 60px;
     font-size: 28px;
   }
 
@@ -189,6 +245,7 @@ font-weight: 600;
     font-weight: 600;
     font-size: 16px;
   }
+
 
   .smallBadge img {
     width: 60%;

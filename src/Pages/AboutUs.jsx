@@ -23,9 +23,46 @@ export const AboutUs = () => {
       <Navigation />
       <Carousel slides={[banner1, banner2, banner3]} />
 
-      <div className="about-us-page">
+      {/* <div className="about-us-page">
         <img src={AboutUsText} alt="About Us Text" className="about-us-text" />
-      </div>
+      </div> */}
+
+      <section class="about-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 text-center">
+                    <div class="about-content mx-auto">
+                        <h1 class="about-title">ABOUT US</h1>
+                        
+                        <h2 class="about-subtitle">We are Arna Bakers Private Limited</h2>
+                        
+                        <p class="about-text">
+                            Our Food-Business Family's commitment in crafting Quality Baked Food & 
+                            Confectionary products spans over five decades (since 1960).
+                        </p>
+                        
+                        <p class="about-text">
+                            We are into Manufacturing, distribution & retail of premium baked food 
+                            products viz. Cookies, Rusks, Breads, Cakes, Muffins, Puffs, Pastries etc. under 
+                            our flagship brand- 'BAKEOFUN'.
+                        </p>
+                        
+                        <p class="about-text">
+                            Our products offerings include more than 150 SKUs which are regularly crafted 
+                            in our state-of-the-art industrial unit.
+                        </p>
+                        
+                        <p class="about-text">
+                            We have been the Contract Manufacturers of 'Parle-G' biscuits for Parle Biscuits 
+                            Pvt. Ltd. in Raipur & U.P; the CM Unit of 'Parle' in Raipur was set up by us in the 
+                            year 2011 which happens to be the largest Automatic Biscuit Plant of 
+                            Chhattisgarh.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
       <div className="container-fluid the-brand">
         <div className="row align-items-center" style={{ backgroundColor: "#BC83661A" , paddingBottom: "50px" }}>
@@ -125,7 +162,7 @@ export const AboutUs = () => {
           </div>
 
           <div className="col-md-5">
-            <div className="breadImage">
+            <div className="breadImage" style={{ marginTop: "50px" }}>
               <img src={ourPlantImage} alt="Bread" />
             </div>
           </div>
@@ -135,11 +172,11 @@ export const AboutUs = () => {
 
       <div className="container-fluid our-reach-main">
         <div className="row align-items-center mt-5" style={{ backgroundColor: "#F8F3F0" , paddingBottom: "30px" }}>
-          <div className="col-6 BigBadge">
+          <div className="col-5 BigBadge">
             <img src={Globe} alt="Big Badge" className="img-fluid" />
           </div>
 
-          <div className="col-6">
+          <div className="col-7" style={{ paddingRight: "80px" }}>
             <div className="Our-reach-heading">
               <h2>Our Reach</h2>
             </div>
