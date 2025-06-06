@@ -46,13 +46,14 @@ export const ContactUs = ({ showHeading = true, mapSrc, stores = [] }) => {
 
         {/* Store Details */}
         <div className="store-details">
-          {stores.map((store, index) => (
-            <div key={index}>
-              <h3>{store.title}</h3>
-              <p style={{ whiteSpace: "pre-line" }}>{store.address}</p>
-              <p>{store.phone}</p>
-            </div>
-          ))}
+         {stores.map((store, index) => (
+  <div className="contact-store" key={index}>
+    {store.title && <h3>{store.title}</h3>}
+    {store.address && <p>{store.address}</p>}
+    {store.phone && <p><strong>Phone:</strong> {store.phone}</p>}
+  </div>
+))}
+
         </div>
       </div>
     </div>
