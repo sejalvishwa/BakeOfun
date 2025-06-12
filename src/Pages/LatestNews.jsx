@@ -16,7 +16,8 @@ export const LatestNews = () => {
 
   const featuredNews = {
     id: 1,
-    title: "BakeOFun Makes a Sweet Impression During India vs New Zealand ODI at Naya Raipur",
+    title:
+      "BakeOFun Makes a Sweet Impression During India vs New Zealand ODI at Naya Raipur",
     excerpt:
       "BakeOFun shined at the India vs New Zealand 2nd ODI on January 21, 2023, at Naya Raipur's Shaheed Veer Narayan Singh Stadium...",
     image: StadiumImage,
@@ -29,7 +30,8 @@ export const LatestNews = () => {
     {
       id: 2,
       title: "Media Campaign Success: BakeOFun Reaches 1 Million Customers",
-      excerpt: "Our recent media campaign has successfully reached over 1 million customers across digital platforms.",
+      excerpt:
+        "Our recent media campaign has successfully reached over 1 million customers across digital platforms.",
       image: MediaCampaign,
       category: "Media Campaign",
       date: "2024-01-12",
@@ -38,7 +40,8 @@ export const LatestNews = () => {
     {
       id: 3,
       title: "Brand Promotion: Partnership with Local Communities",
-      excerpt: "BakeOFun announces exciting partnerships with local communities to bring fresh, quality baked goods closer to families.",
+      excerpt:
+        "BakeOFun announces exciting partnerships with local communities to bring fresh, quality baked goods closer to families.",
       image: BrandPromotion,
       category: "Brand Promotion",
       date: "2024-01-10",
@@ -47,7 +50,8 @@ export const LatestNews = () => {
     {
       id: 5,
       title: "Customer Stories: Spreading Goodness & Smiles",
-      excerpt: "Heartwarming stories from our customers about how BakeOFun products have become part of their special moments.",
+      excerpt:
+        "Heartwarming stories from our customers about how BakeOFun products have become part of their special moments.",
       image: CustomerStories,
       category: "Customer Stories",
       date: "2024-01-05",
@@ -55,10 +59,18 @@ export const LatestNews = () => {
     },
   ];
 
-  const categories = ["All", "Media Campaign", "Brand Promotion", "Product Launch", "Customer Stories"];
+  const categories = [
+    "All",
+    "Media Campaign",
+    "Brand Promotion",
+    "Product Launch",
+    "Customer Stories",
+  ];
 
   const filteredArticles =
-    activeCategory === "All" ? newsArticles : newsArticles.filter((article) => article.category === activeCategory);
+    activeCategory === "All"
+      ? newsArticles
+      : newsArticles.filter((article) => article.category === activeCategory);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -79,7 +91,9 @@ export const LatestNews = () => {
             <h1>Latest News</h1>
             <p className="subtitle">Media Campaigns & Brand Promotions</p>
             <p className="description">
-              Stay updated with the latest happenings at BakeOFun - from exciting product launches to community initiatives that spread goodness and smiles.
+              Stay updated with the latest happenings at BakeOFun - from
+              exciting product launches to community initiatives that spread
+              goodness and smiles.
             </p>
           </div>
         </div>
@@ -91,7 +105,9 @@ export const LatestNews = () => {
             {categories.map((category) => (
               <button
                 key={category}
-                className={`filter-btn ${activeCategory === category ? "active" : ""}`}
+                className={`filter-btn ${
+                  activeCategory === category ? "active" : ""
+                }`}
                 onClick={() => setActiveCategory(category)}
               >
                 {category}
@@ -112,10 +128,18 @@ export const LatestNews = () => {
                 <h3>{featuredNews.title}</h3>
                 <p>{featuredNews.excerpt}</p>
                 <div className="article-meta">
-                  <span className="date">📅 {formatDate(featuredNews.date)}</span>
+                  <span className="date">
+                    📅 {formatDate(featuredNews.date)}
+                  </span>
                   <span className="read-time">⏱️ {featuredNews.readTime}</span>
                 </div>
-                <button className="read-more-btn" onClick={() => navigate(`/news/${featuredNews.id}`)}>
+                <button
+                  className="read-more-btn"
+                  onClick={() => {
+                    navigate(`/news/${featuredNews.id}`);
+                    window.scrollTo(0, 0);
+                  }}
+                >
                   Read More →
                 </button>
               </div>
@@ -137,11 +161,20 @@ export const LatestNews = () => {
                     <h3>{article.title}</h3>
                     <p>{article.excerpt}</p>
                     <div className="article-meta">
-                      <span className="date">📅 {formatDate(article.date)}</span>
+                      <span className="date">
+                        📅 {formatDate(article.date)}
+                      </span>
                       <span className="read-time">⏱️ {article.readTime}</span>
                     </div>
-                    <button className="read-more-btn" onClick={() => navigate(`/news/${article.id}`)}>Read More →</button>
-
+                    <button
+                      className="read-more-btn"
+                      onClick={() => {
+                        navigate(`/news/${article.id}`);
+                        window.scrollTo(0, 0);
+                      }}
+                    >
+                      Read More →
+                    </button>
                   </div>
                 </div>
               ))}

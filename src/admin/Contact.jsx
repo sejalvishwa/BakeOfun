@@ -1,57 +1,43 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Contact.css";
+import axios from "axios";
 
 const Contact = () => {
-  const initialMessages = [
-    {
-      id: 1,
-      name: "John Doe",
-      email: "john.doe@example.com",
-      message:
-        "I would like to know more about your premium bread products and bulk ordering options.",
-      date: "2023-06-03",
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      email: "jane.smith@example.com",
-      message:
-        "The coconut cookies are amazing! My family loves them. Keep up the great work!",
-      date: "2023-06-02",
-    },
-    {
-      id: 3,
-      name: "Mike Johnson",
-      email: "mike.johnson@example.com",
-      message:
-        "We are a retail chain and would like to discuss partnership opportunities for distributing your products.",
-      date: "2023-06-01",
-    },
-    {
-      id: 4,
-      name: "Sarah Wilson",
-      email: "sarah.wilson@example.com",
-      message:
-        "I received a damaged package yesterday. The bread was completely crushed. Please help resolve this issue.",
-      date: "2023-05-31",
-    },
-    {
-      id: 5,
-      name: "David Brown",
-      email: "david.brown@example.com",
-      message:
-        "Could you please provide detailed nutritional information for your milk rusk products?",
-      date: "2023-05-30",
-    },
-  ];
-
+  const [messages, setMessages] = useState([]);
+  const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const filteredMessages = initialMessages.filter(
+  // Fetch data from API
+  useEffect(() => {
+    const getContactData = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/contact", {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        // Sort messages by most recent date
+        const sortedMessages = response.data.data.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        );
+
+        setMessages(sortedMessages);
+      } catch (error) {
+        console.error("Error fetching contact data:", error);
+        setError("Failed to fetch contact data");
+      }
+    };
+
+    getContactData();
+  }, []);
+
+  // Filter messages based on search term
+  const filteredMessages = messages.filter(
     (msg) =>
-      msg.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      msg.full_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       msg.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
       msg.message.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -71,28 +57,34 @@ const Contact = () => {
           />
         </div>
 
-        <table className="contact-table">
-          <thead>
-            <tr>
-              <th>SNo.</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Message</th>
-              <th>Created On</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredMessages.map((msg, index) => (
-              <tr key={msg.id}>
-                <td>{index + 1}</td>
-                <td>{msg.name}</td>
-                <td>{msg.email}</td>
-                <td>{msg.message}</td>
-                <td>{msg.date}</td>
+        {error ? (
+          <p className="error">{error}</p>
+        ) : messages.length === 0 ? (
+          <p className="loading">Loading messages...</p>
+        ) : (
+          <table className="contact-table">
+            <thead>
+              <tr>
+                <th>SNo.</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Message</th>
+                <th>Created On</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {filteredMessages.map((msg, index) => (
+                <tr key={msg._id}>
+                  <td>{index + 1}</td>
+                  <td>{msg.full_name}</td>
+                  <td>{msg.email}</td>
+                  <td>{msg.message}</td>
+                  <td>{msg.createdAt?.substring(0, 10)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
     </div>
   );

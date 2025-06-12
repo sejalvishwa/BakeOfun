@@ -28,12 +28,11 @@
 /* About Section */
 .footer-logo {
   width: 80%;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .footer-about {
-  margin-top: 10px;
-  margin-top: 40px;
+  margin-top: 1px;
 }
 
 .footer-about h4 {
@@ -64,8 +63,8 @@
 .contact-item {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 15px;
+  gap: 3px;
+  margin-bottom: 4px;
   margin-left: 20px;
   margin-top: 20px;
   font-size: 14px;
@@ -75,7 +74,7 @@
 /* Social Section */
 
 .social-column{
-  margin-top: 40px;
+  margin-top: 50px;
 }
 .social-column h4 {
   color: #FFCE00;
@@ -218,6 +217,7 @@ width: 100vw; /* Full width of the viewport */
   .social-column h4 {
     margin-left: 0 !important;
   }
+
 
   .quick-links {
     margin-left: 0 !important;

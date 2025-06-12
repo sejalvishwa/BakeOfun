@@ -1,35 +1,35 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Routes, Route, Navigate, useLocation } from "react-router-dom"
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import Box from '@mui/material/Box';
-import "./App.css"
+import { useState, useEffect } from "react";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import Box from "@mui/material/Box";
+import "./App.css";
 
 // Components
-import Login from "./Login"
-import Dashboard from "./Dashboard"
-import Sidebar from "./Sidebar"
-import Header from "./Header"
-import Products from "./Products"
-import AddProduct from "./AddProduct"
-import Banners from "./Banners"
-import LiveProducts from "./LiveProducts"
-import Contact from "./Contact"
-import AddLiveProducts from "./AddLiveProducts"
+import Login from "./Login";
+import Dashboard from "./Dashboard";
+import Sidebar from "./Sidebar";
+import Header from "./Header";
+import Products from "./Products";
+import AddProduct from "./AddProduct";
+import Banners from "./Banners";
+import LiveProducts from "./LiveProducts";
+import Contact from "./Contact";
+import AddLiveProducts from "./AddLiveProducts";
 
 // Create theme
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#0a2a8a',
+      main: "#0a2a8a",
     },
     secondary: {
-      main: '#ffc107',
+      main: "#ffc107",
     },
     background: {
-      default: '#f5f5f5',
+      default: "#f5f5f5",
     },
   },
   typography: {
@@ -38,33 +38,33 @@ const theme = createTheme({
 });
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [user, setUser] = useState(null)
-  const location = useLocation()
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState(null);
+  const location = useLocation();
 
   // Check if user is already logged in
   useEffect(() => {
-    const loggedInUser = localStorage.getItem("user")
+    const loggedInUser = localStorage.getItem("user");
     if (loggedInUser) {
-      setUser(JSON.parse(loggedInUser))
-      setIsAuthenticated(true)
+      setUser(JSON.parse(loggedInUser));
+      setIsAuthenticated(true);
     }
-  }, [])
+  }, []);
 
   const handleLogin = (userData) => {
-    setUser(userData)
-    setIsAuthenticated(true)
-    localStorage.setItem("user", JSON.stringify(userData))
-  }
+    setUser(userData);
+    setIsAuthenticated(true);
+    localStorage.setItem("user", JSON.stringify(userData));
+  };
 
   const handleLogout = () => {
-    setUser(null)
-    setIsAuthenticated(false)
-    localStorage.removeItem("user")
-  }
+    setUser(null);
+    setIsAuthenticated(false);
+    localStorage.removeItem("user");
+  };
 
-  // If not authenticated and not on login page, redirect to login
-  if (!isAuthenticated && !location.pathname.includes('/login')) {
+  // Redirect to login if not authenticated and not on login page
+  if (!isAuthenticated && !location.pathname.includes("/login")) {
     return <Navigate to="login" replace />;
   }
 
@@ -99,7 +99,7 @@ function App() {
         )}
       </Box>
     </ThemeProvider>
-  )
+  );
 }
 
-export default App 
+export default App;

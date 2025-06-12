@@ -1,91 +1,41 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
+import axios from "axios"
 import "./Products.css"
+import { config } from "../config/config.js"
 
 const Products = () => {
-  const initialProducts = [
-    {
-      id: 1,
-      name: "Premium Bread",
-      category: "Bread",
-      price: 45.0,
-      stock: 120,
-      status: "Active",
-      image: "/images/premium-bread.jpg",
-      platforms: ["Swiggy", "Zomato"],
-    },
-    {
-      id: 2,
-      name: "Milk Rusk",
-      category: "Rusk",
-      price: 35.0,
-      status: "Active",
-      image: "/images/milk-rusk.jpg",
-      platforms: ["Zomato"],
-    },
-    {
-      id: 3,
-      name: "Coconut Cookies",
-      category: "Cookies",
-      price: 50.0,
-      status: "Active",
-      image: "/images/coconut-cookies.jpg",
-      platforms: ["Swiggy"],
-    },
-    {
-      id: 4,
-      name: "Brown Bread",
-      category: "Bread",
-      price: 40.0,
-      status: "Active",
-      image: "/images/brown-bread.jpg",
-      platforms: ["Swiggy", "Zomato"],
-    },
-    {
-      id: 5,
-      name: "Multi Grain Bread",
-      category: "Bread",
-      price: 55.0,
-      status: "Active",
-      image: "/images/multi-grain-bread.jpg",
-      platforms: [],
-    },
-    {
-      id: 6,
-      name: "Paw Bread",
-      category: "Bread",
-      price: 48.0,
-      status: "Draft",
-      image: "/images/paw-bread.jpg",
-      platforms: ["Swiggy"],
-    },
-    {
-      id: 7,
-      name: "Family Bread",
-      category: "Bread",
-      price: 60.0,
-      status: "Active",
-      image: "/images/family-bread.jpg",
-      platforms: ["Zomato"],
-    },
-  ]
-
-  const [products, setProducts] = useState(initialProducts)
+  const [products, setProducts] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
   const [searchTerm, setSearchTerm] = useState("")
   const [filterCategory, setFilterCategory] = useState("")
-  const [filterStatus, setFilterStatus] = useState("")
   const [currentPage, setCurrentPage] = useState(1)
   const [selectedProducts, setSelectedProducts] = useState([])
 
   const productsPerPage = 5
-  const categories = [...new Set(initialProducts.map((p) => p.category))]
+  const categories = [...new Set(products.map((p) => p.category))]
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get(`${config.API_BASE_URL}/api/products`)
+        setProducts(response.data.data)
+        setLoading(false)
+      } catch (err) {
+        setError(err.message)
+        setLoading(false)
+      }
+    }
+
+    fetchProducts()
+  }, [])
 
   const filteredProducts = products.filter((p) =>
     p.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-    (filterCategory === "" || p.category === filterCategory) &&
-    (filterStatus === "" || p.status === filterStatus)
+    (filterCategory === "" || p.category === filterCategory)
   )
 
   const indexOfLast = currentPage * productsPerPage
@@ -103,30 +53,43 @@ const Products = () => {
     if (selectedProducts.length === currentProducts.length) {
       setSelectedProducts([])
     } else {
-      setSelectedProducts(currentProducts.map((p) => p.id))
+      setSelectedProducts(currentProducts.map((p) => p._id))
     }
   }
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this product?")) {
-      setProducts(products.filter((p) => p.id !== id))
-      setSelectedProducts(selectedProducts.filter((pid) => pid !== id))
+      try {
+        await axios.delete(`${config.API_BASE_URL}/api/products/${id}`)
+        setProducts(products.filter((p) => p._id !== id))
+        setSelectedProducts(selectedProducts.filter((pid) => pid !== id))
+      } catch (err) {
+        alert("Failed to delete product")
+      }
     }
   }
 
-  const handleBulkDelete = () => {
+  const handleBulkDelete = async () => {
     if (
       selectedProducts.length > 0 &&
       window.confirm(`Delete ${selectedProducts.length} selected products?`)
     ) {
-      setProducts(products.filter((p) => !selectedProducts.includes(p.id)))
-      setSelectedProducts([])
+      try {
+        await Promise.all(
+          selectedProducts.map(id =>
+            axios.delete(`${config.API_BASE_URL}/api/products/${id}`)
+          )
+        )
+        setProducts(products.filter((p) => !selectedProducts.includes(p._id)))
+        setSelectedProducts([])
+      } catch (err) {
+        alert("Failed to delete some products")
+      }
     }
   }
 
-  const handleStatusChange = (id, newStatus) => {
-    setProducts(products.map((p) => (p.id === id ? { ...p, status: newStatus } : p)))
-  }
+  if (loading) return <div className="loading">Loading products...</div>
+  if (error) return <div className="error">Error: {error}</div>
 
   return (
     <div className="products-container">
@@ -152,20 +115,16 @@ const Products = () => {
           </div>
 
           <div className="filter-options">
-            <select value={filterCategory} onChange={(e) => setFilterCategory(e.target.value)}>
+            <select
+              value={filterCategory}
+              onChange={(e) => setFilterCategory(e.target.value)}
+            >
               <option value="">All Categories</option>
               {categories.map((cat, i) => (
                 <option key={i} value={cat}>
                   {cat}
                 </option>
               ))}
-            </select>
-
-            <select value={filterStatus} onChange={(e) => setFilterStatus(e.target.value)}>
-              <option value="">All Status</option>
-              <option value="Active">Active</option>
-              <option value="Draft">Draft</option>
-              <option value="Inactive">Inactive</option>
             </select>
           </div>
         </div>
@@ -188,14 +147,16 @@ const Products = () => {
                 <th>
                   <input
                     type="checkbox"
-                    checked={selectedProducts.length === currentProducts.length && currentProducts.length > 0}
+                    checked={
+                      selectedProducts.length === currentProducts.length &&
+                      currentProducts.length > 0
+                    }
                     onChange={toggleSelectAll}
                   />
                 </th>
                 <th>Name</th>
                 <th>Category</th>
                 <th>Price</th>
-                <th>Status</th>
                 <th>Image</th>
                 <th>Delivery Platforms</th>
                 <th>Actions</th>
@@ -204,40 +165,33 @@ const Products = () => {
             <tbody>
               {currentProducts.length > 0 ? (
                 currentProducts.map((p) => (
-                  <tr key={p.id}>
+                  <tr key={p._id}>
                     <td>
                       <input
                         type="checkbox"
-                        checked={selectedProducts.includes(p.id)}
-                        onChange={() => toggleProductSelection(p.id)}
+                        checked={selectedProducts.includes(p._id)}
+                        onChange={() => toggleProductSelection(p._id)}
                       />
                     </td>
                     <td>{p.name}</td>
-                    <td>{p.category}</td>
+                    <td>{p.categoryTitle || p.category}</td>
                     <td>₹{p.price.toFixed(2)}</td>
                     <td>
-                      <select
-                        value={p.status}
-                        className={`status-select ${p.status.toLowerCase()}`}
-                        onChange={(e) => handleStatusChange(p.id, e.target.value)}
-                      >
-                        <option value="Active">Active</option>
-                        <option value="Draft">Draft</option>
-                        <option value="Inactive">Inactive</option>
-                      </select>
-                    </td>
-                    <td>
                       <img
-                        src={p.image || "/placeholder.svg"}
+                        src={
+                          p.images?.[0]
+                            ? config.IMAGE_BASE_URL + p.images[0]
+                            : "/placeholder.svg"
+                        }
                         alt={p.name}
                         style={{ width: "60px", borderRadius: "8px" }}
                       />
                     </td>
                     <td>
-                      {p.platforms.length > 0 ? (
-                        p.platforms.map((platform, i) => (
+                      {p.deliveryPlatforms?.length > 0 ? (
+                        p.deliveryPlatforms.map((platform, i) => (
                           <span key={i} className="platform-badge">
-                            {platform}
+                            {platform.name}
                           </span>
                         ))
                       ) : (
@@ -246,10 +200,16 @@ const Products = () => {
                     </td>
                     <td>
                       <div className="action-buttons">
-                        <button className="action-btn edit">
+                        <Link
+                          to={`/admin/edit-product/${p._id}`}
+                          className="action-btn edit"
+                        >
                           <span className="material-icons">edit</span>
-                        </button>
-                        <button className="action-btn delete" onClick={() => handleDelete(p.id)}>
+                        </Link>
+                        <button
+                          className="action-btn delete"
+                          onClick={() => handleDelete(p._id)}
+                        >
                           <span className="material-icons">delete</span>
                         </button>
                       </div>
@@ -258,7 +218,7 @@ const Products = () => {
                 ))
               ) : (
                 <tr>
-                  <td colSpan="8" className="no-products">
+                  <td colSpan="7" className="no-products">
                     No products found.
                   </td>
                 </tr>
@@ -270,7 +230,10 @@ const Products = () => {
         {/* Pagination */}
         {totalPages > 1 && (
           <div className="pagination">
-            <button disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>
+            <button
+              disabled={currentPage === 1}
+              onClick={() => setCurrentPage(currentPage - 1)}
+            >
               <span className="material-icons">chevron_left</span>
             </button>
             {[...Array(totalPages)].map((_, i) => (
@@ -282,7 +245,10 @@ const Products = () => {
                 {i + 1}
               </button>
             ))}
-            <button disabled={currentPage === totalPages} onClick={() => setCurrentPage(currentPage + 1)}>
+            <button
+              disabled={currentPage === totalPages}
+              onClick={() => setCurrentPage(currentPage + 1)}
+            >
               <span className="material-icons">chevron_right</span>
             </button>
           </div>

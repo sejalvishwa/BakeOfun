@@ -1,92 +1,36 @@
-// File: components/LiveProducts.jsx
 "use client";
 
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import "./LiveProducts.css";
+import { config } from "../config/config.js";
 
 const LiveProducts = () => {
-  const initialProducts = [
-    {
-      id: 1,
-      name: "Premium Bread",
-      category: "Bread",
-      price: 45.0,
-      status: "Active",
-      image: "/images/premium-bread.jpg",
-      lastUpdated: "2023-06-03 10:30 AM",
-      platforms: ["Swiggy", "Zomato"],
-    },
-    {
-      id: 2,
-      name: "Milk Rusk",
-      category: "Rusk",
-      price: 35.0,
-      status: "Active",
-      image: "/images/milk-rusk.jpg",
-      lastUpdated: "2023-06-03 09:15 AM",
-      platforms: ["Zomato"],
-    },
-    {
-      id: 3,
-      name: "Coconut Cookies",
-      category: "Cookies",
-      price: 50.0,
-      status: "Active",
-      image: "/images/coconut-cookies.jpg",
-      lastUpdated: "2023-06-03 08:45 AM",
-      platforms: ["Swiggy"],
-    },
-    {
-      id: 4,
-      name: "Brown Bread",
-      category: "Bread",
-      price: 40.0,
-      status: "Active",
-      image: "/images/brown-bread.jpg",
-      lastUpdated: "2023-06-03 11:20 AM",
-      platforms: [],
-    },
-    {
-      id: 5,
-      name: "Family Bread",
-      category: "Bread",
-      price: 60.0,
-      status: "Active",
-      image: "/images/family-bread.jpg",
-      lastUpdated: "2023-06-03 07:30 AM",
-      platforms: ["Swiggy", "Zomato"],
-    },
-  ];
-
-  const [products, setProducts] = useState(initialProducts);
+  const [products, setProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterCategory, setFilterCategory] = useState("");
   const [refreshing, setRefreshing] = useState(false);
 
-  const categories = [
-    ...new Set(initialProducts.map((product) => product.category)),
-  ];
+  const categories = [...new Set(products.map((product) => product.category))];
 
   const filteredProducts = products.filter((product) => {
     return (
       product.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
       (filterCategory === "" || product.category === filterCategory) &&
-      product.status === "Active"
+      product.isActive === true
     );
   });
 
-  const totalProducts = products.filter(
-    (product) => product.status === "Active"
-  ).length;
+  const totalProducts = products.filter((product) => product.isActive).length;
 
   const handleRefresh = () => {
     setRefreshing(true);
     setTimeout(() => {
       const updatedProducts = products.map((product) => ({
         ...product,
-        lastUpdated: new Date().toLocaleString(),
-        platforms: product.platforms || [], // Explicitly keep platforms
+        updatedAt: new Date().toLocaleString(),
+        deliveryPlatforms: product.deliveryPlatforms || [],
       }));
       setProducts(updatedProducts);
       setRefreshing(false);
@@ -100,12 +44,28 @@ const LiveProducts = () => {
       }
     }, 30000);
     return () => clearInterval(interval);
-  }, [refreshing]);
+  }, [refreshing, products]);
 
-  // Debug: Log platforms to confirm data is present
   useEffect(() => {
-    console.log("Products platforms:", products.map(p => ({ id: p.id, platforms: p.platforms })));
-  }, [products]);
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get(
+          `${config.API_BASE_URL}/api/live-products`
+        );
+        const productData = response.data.data;
+        const dataArray = Array.isArray(productData)
+          ? productData
+          : [productData];
+        setProducts(dataArray);
+        console.log("Fetched Products:", dataArray);
+      } catch (error) {
+        console.error("Error fetching live products:", error);
+        setProducts([]);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   return (
     <div className="live-products-container">
@@ -165,43 +125,67 @@ const LiveProducts = () => {
                 <th>Category</th>
                 <th>Price</th>
                 <th>Last Updated</th>
-                <th>Platforms</th> {/* Added Platforms column */}
+                <th>Platforms</th>
               </tr>
             </thead>
             <tbody>
               {filteredProducts.length > 0 ? (
                 filteredProducts.map((product) => (
-                  <tr key={product.id}>
+                  <tr key={product._id || product.id}>
                     <td>
-  <div className="product-info-admin">
-    <div className="product-image">
-      <img
-        src={
-          product.image ||
-          "/placeholder.svg?height=50&width=50"
-        }
-        alt={product.name}
-      />
-    </div>
-    <div className="product-details">
-      <span className="product-name">{product.name}</span>
-      <span className="product-price">₹{product.price.toFixed(2)}</span>
-    </div>
-  </div>
-</td>
-
-
+                      <div className="product-info-admin">
+                        <div className="product-image">
+                          <img
+                            src={
+                              product.images && product.images.length > 0
+                                ? `${config.IMAGE_BASE_URL}${product.images[0]}`
+                                : "/placeholder.svg"
+                            }
+                            alt={product.name}
+                            style={{
+                              height: "50px",
+                              width: "50px",
+                              objectFit: "cover",
+                            }}
+                          />
+                        </div>
+                        <div className="product-details">
+                          <span className="product-name">{product.name}</span>
+                        </div>
+                      </div>
+                    </td>
                     <td>{product.category}</td>
                     <td>₹{product.price.toFixed(2)}</td>
                     <td>
-                      <span className="last-updated">{product.lastUpdated}</span>
+                      <span className="last-updated">
+                        {new Date(
+                          product.updatedAt || product.createdAt
+                        ).toLocaleString()}
+                      </span>
                     </td>
                     <td>
-                      {product.platforms && product.platforms.length > 0 ? (
-                        product.platforms.map((platform, i) => (
-                          <span className="platform-tag" key={i}>
-                            {platform}
-                          </span>
+                      {product.deliveryPlatforms &&
+                      product.deliveryPlatforms.length > 0 ? (
+                        product.deliveryPlatforms.map((platform, i) => (
+                          <a
+                            href={platform.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            key={i}
+                            className="platform-tag"
+                            style={{
+                              marginRight: "6px",
+                              display: "inline-flex",
+                              alignItems: "center",
+                            }}
+                          >
+                            <img
+                              src={`${config.IMAGE_BASE_URL}${platform.logo}`}
+                              alt={platform.name}
+                              style={{ height: "20px", marginRight: "4px" }}
+                            />
+                            {platform.name}
+                          </a>
                         ))
                       ) : (
                         <span className="platform-tag none">None</span>

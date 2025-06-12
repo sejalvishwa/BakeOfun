@@ -23,9 +23,12 @@ import banner3 from "../assets/images/AboutBanner3.jpg";
 import { AboutUsSection } from "../Components/AboutUsSection";  
 import { homeProducts } from "../data/homeProducts";
 import BakeryBanner from "../Components/BakeryBanner";
-import {OurForte} from "../Components/OurForte";
+import { OurForte } from "../Components/OurForte";
 
-// import { FaBullseye } from "react-icons/fa";
+import axios from "axios";
+import { useEffect, useState } from "react";
+
+const API_URL = "http://localhost:5000";
 
 const aboutUsTitle = "A Li'l bit About Us";
 
@@ -65,11 +68,40 @@ const forte = [
 ];
 
 export const Home = () => {
+  const [mainBanner, setMainBanner] = useState(null);
+
+  useEffect(() => {
+    const fetchBanner = async () => {
+      try {
+        const res = await axios.get(`${API_URL}/api/banners`);
+        const banners = res.data.data || [];
+
+        const bannerWithOrderOne = banners.find(
+          (banner) => Number(banner.order_number || banner.order) === 1
+        );
+
+        setMainBanner(bannerWithOrderOne);
+      } catch (error) {
+        console.error("Failed to fetch banner:", error);
+      }
+    };
+
+    fetchBanner();
+  }, []);
+
   return (
     <>
       <Navigation />
       <div className="banner-container">
-        <img src={bannerImage} alt="BakeOfun Banner" className="banner-img" />
+        {mainBanner ? (
+          <img
+            src={`${API_URL}${mainBanner.image}`}
+            alt="Homepage Banner"
+            className="banner-img"
+          />
+        ) : (
+          <img src={bannerImage} alt="Default Banner" className="banner-img" />
+        )}
         <div className="banner-bottom">
           <a href="#"><button className="shop-button">SHOP NOW</button></a>
         </div>
@@ -87,12 +119,12 @@ export const Home = () => {
           <img src={YellowLine} alt="Yellow Line" className="yellow-line" />
         </div>
 
-
         <FeaturedProducts products={homeProducts} showTitle={true} showPrice={false} />
 
         <div className="our-focus-section">
           <h1>OUR FOCUS : GOOD WORK</h1>
         </div>
+
         <div className="why-choose-us">
           <div className="feature-card">
             <img src={machineryIcon} alt="Advanced Plant and Machinery" />
@@ -110,7 +142,9 @@ export const Home = () => {
 
         <div className="our-focus-section">
           <h1>OUR FORTE...</h1>
-           <OurForte/>
+          <OurForte />
+        </div>
+
         <div className="our-presence-section">
           <h1>Our Presence</h1>
           <div className="our-presence-logos">
@@ -121,9 +155,8 @@ export const Home = () => {
             <img src={relianceImage} alt="Reliance" />
           </div>
         </div>
-        </div>
 
-      <BakeryBanner/>
+        <BakeryBanner />
         <Footer />
       </div>
     </>

@@ -27,7 +27,7 @@ export const Footer = () => {
                   With over five decades of excellence since 1960, our
                   family-run food business specializes in crafting premium baked
                   goods under the flagship brand ‘BAKEOFUN’. We offer 150+ SKUs
-                  including cookies, breads, cakes, and more—manufactured at our
+                  including cookies, breads, cakes, and more manufactured at our
                   state-of-the-art facility.
                 </p>
               </div>
@@ -86,17 +86,24 @@ export const Footer = () => {
 
         {/* Footer Bottom */}
         <div className="footer-bottom">
-         <p>
-  © {new Date().getFullYear()} | Designed & developed by{" "}
-  <a href="https://concavemedia.in" target="_blank" rel="noopener noreferrer">
-    Concave
-  </a>{" "}
-  &{" "}
-  <a href="https://inextsoftware.in/" target="_blank" rel="noopener noreferrer">
-    Inext Software Solution Pvt Ltd.
-  </a>
-</p>
-
+          <p>
+            © {new Date().getFullYear()} | Designed & developed by{" "}
+            <a
+              href="https://concavemedia.in"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Concave
+            </a>{" "}
+            &{" "}
+            <a
+              href="https://inextsoftware.in/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Inext Software Solution Pvt Ltd.
+            </a>
+          </p>
         </div>
       </footer>
     </>
