@@ -4,46 +4,57 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./Dashboard.css";
+import { config } from "../config/config";
 
 const Dashboard = () => {
   const [stats, setStats] = useState([
-    { title: "Total Products", value: 124, icon: "inventory_2", color: "#0a2a8a" },
-    { title: "Active Banners", value: 8, icon: "collections", color: "#ffc107" },
-    { title: "Live Products", value: 98, icon: "visibility", color: "#28a745" },
-    { title: "Contacts", value: 0, icon: "email", color: "#dc3545" },
+    {
+      title: "Total Products",
+      value: 0,
+      icon: "inventory_2",
+      color: "#0a2a8a",
+    },
+    {
+      title: "Active Banners",
+      value: 0,
+      icon: "collections",
+      color: "#ffc107",
+    },
+    {
+      title: "Live Products",
+      value: 0,
+      icon: "visibility",
+      color: "#28a745",
+    },
+    {
+      title: "Contacts",
+      value: 0,
+      icon: "email",
+      color: "#dc3545",
+    },
   ]);
 
   const [recentMessages, setRecentMessages] = useState([]);
+  const [recentProducts, setRecentProducts] = useState([]);
   const [error, setError] = useState(null);
 
-  const recentProducts = [
-    { id: 1, name: "Premium Bread", category: "Bread", status: "Active", date: "2023-06-01" },
-    { id: 2, name: "Milk Rusk", category: "Rusk", status: "Active", date: "2023-05-28" },
-    { id: 3, name: "Coconut Cookies", category: "Cookies", status: "Active", date: "2023-05-25" },
-    { id: 4, name: "Brown Bread", category: "Bread", status: "Draft", date: "2023-05-20" },
-  ];
-
   useEffect(() => {
-    // Fetch contacts
     const fetchRecentContacts = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/contact", {
-          headers: { "Content-Type": "application/json" },
-        });
+        const response = await axios.get(`${config.API_BASE_URL}/api/contact`);
+        const allContacts = response.data.data || [];
 
-        const allContacts = response.data.data;
-
-        // Sort by most recent and get top 4
         const sorted = allContacts
           .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
           .slice(0, 4);
 
         setRecentMessages(sorted);
 
-        // Update contacts count
         setStats((prevStats) =>
           prevStats.map((stat) =>
-            stat.title === "Contacts" ? { ...stat, value: allContacts.length } : stat
+            stat.title === "Contacts"
+              ? { ...stat, value: allContacts.length }
+              : stat
           )
         );
       } catch (err) {
@@ -52,17 +63,16 @@ const Dashboard = () => {
       }
     };
 
-    // Fetch banners count
     const fetchBannersCount = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/banners");
+        const response = await axios.get(`${config.API_BASE_URL}/api/banners`);
         const banners = response.data.data || [];
-        const activeCount = banners.length;
 
-        // Update Active Banners count in stats
         setStats((prevStats) =>
           prevStats.map((stat) =>
-            stat.title === "Active Banners" ? { ...stat, value: activeCount } : stat
+            stat.title === "Active Banners"
+              ? { ...stat, value: banners.length }
+              : stat
           )
         );
       } catch (err) {
@@ -70,12 +80,53 @@ const Dashboard = () => {
       }
     };
 
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get(`${config.API_BASE_URL}/api/products`);
+        const allProducts = response.data.data || [];
+
+        setStats((prevStats) =>
+          prevStats.map((stat) =>
+            stat.title === "Total Products"
+              ? { ...stat, value: allProducts.length }
+              : stat
+          )
+        );
+
+        const sortedRecent = allProducts
+          .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+          .slice(0, 4);
+
+        setRecentProducts(sortedRecent);
+      } catch (err) {
+        console.error("Error fetching products:", err);
+      }
+    };
+
+    const fetchLiveProductsCount = async () => {
+      try {
+        const response = await axios.get(`${config.API_BASE_URL}/api/live-products`);
+        const liveProducts = response.data.data || [];
+        const activeCount = liveProducts.filter((p) => p.isActive).length;
+
+        setStats((prevStats) =>
+          prevStats.map((stat) =>
+            stat.title === "Live Products"
+              ? { ...stat, value: activeCount }
+              : stat
+          )
+        );
+      } catch (err) {
+        console.error("Error fetching live products:", err);
+      }
+    };
+
+    // Call all data fetching functions
     fetchRecentContacts();
     fetchBannersCount();
+    fetchProducts();
+    fetchLiveProductsCount();
   }, []);
-
-  // ... rest of your component remains unchanged
-
 
   return (
     <div className="dashboard">
@@ -96,11 +147,13 @@ const Dashboard = () => {
       </div>
 
       <div className="dashboard-grid">
-        {/* Recent Products Card */}
+        {/* Recent Products */}
         <div className="card">
           <div className="card-header" style={{ backgroundColor: "#10256F" }}>
-            <h2 className="card-title" style={{ color: "#ffffff" }}>Recent Products</h2>
-            <button className="btn btn-primary">View All</button>
+            <h2 className="card-title" style={{ color: "#ffffff" }}>
+              Recent Products
+            </h2>
+            <Link to="/admin/products" className="btn btn-primary">View All</Link>
           </div>
           <div className="table-container">
             <table className="table">
@@ -115,16 +168,16 @@ const Dashboard = () => {
               </thead>
               <tbody>
                 {recentProducts.map((product) => (
-                  <tr key={product.id}>
-                    <td>#{product.id}</td>
+                  <tr key={product._id}>
+                    <td>#{product._id.slice(-4)}</td>
                     <td>{product.name}</td>
                     <td>{product.category}</td>
                     <td>
-                      <span className={`status-badge ${product.status.toLowerCase()}`}>
-                        {product.status}
+                      <span className={`status-badge ${product.status?.toLowerCase() || "active"}`}>
+                        {product.status || "Active"}
                       </span>
                     </td>
-                    <td>{product.date}</td>
+                    <td>{product.createdAt?.substring(0, 10)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -132,10 +185,12 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Recent Contacts Card */}
+        {/* Recent Contacts */}
         <div className="card">
           <div className="card-header" style={{ backgroundColor: "#10256F" }}>
-            <h2 className="card-title" style={{ color: "#ffffff" }}>Recent Contacts</h2>
+            <h2 className="card-title" style={{ color: "#ffffff" }}>
+              Recent Contacts
+            </h2>
             <Link to="/admin/contact" className="btn btn-primary">View All</Link>
           </div>
           <div className="table-container">
@@ -167,10 +222,12 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Quick Actions Card */}
+      {/* Quick Actions */}
       <div className="card">
         <div className="card-header" style={{ backgroundColor: "#10256F" }}>
-          <h2 className="card-title" style={{ color: "#ffffff" }}>Quick Actions</h2>
+          <h2 className="card-title" style={{ color: "#ffffff" }}>
+            Quick Actions
+          </h2>
         </div>
         <div className="quick-actions">
           <Link to="/admin/add-product" className="action-btn">

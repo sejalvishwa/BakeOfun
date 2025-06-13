@@ -1,73 +1,96 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
-import axios from "axios"
-import "./Products.css"
-import { config } from "../config/config.js"
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import "./Products.css";
+import { config } from "../config/config.js";
 
 const Products = () => {
-  const [products, setProducts] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-  const [searchTerm, setSearchTerm] = useState("")
-  const [filterCategory, setFilterCategory] = useState("")
-  const [currentPage, setCurrentPage] = useState(1)
-  const [selectedProducts, setSelectedProducts] = useState([])
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filterCategory, setFilterCategory] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [selectedProducts, setSelectedProducts] = useState([]);
 
-  const productsPerPage = 5
-  const categories = [...new Set(products.map((p) => p.category))]
+  const productsPerPage = 5;
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(`${config.API_BASE_URL}/api/products`)
-        setProducts(response.data.data)
-        setLoading(false)
+        const response = await axios.get(`${config.API_BASE_URL}/api/products`);
+        setProducts(response.data.data);
+        setLoading(false);
       } catch (err) {
-        setError(err.message)
-        setLoading(false)
+        setError(err.message);
+        setLoading(false);
       }
-    }
+    };
 
-    fetchProducts()
-  }, [])
+    fetchProducts();
+  }, []);
 
-  const filteredProducts = products.filter((p) =>
-    p.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-    (filterCategory === "" || p.category === filterCategory)
-  )
+  const filteredProducts = products.filter(
+    (p) =>
+      p.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      (filterCategory === "" || p.category === filterCategory)
+  );
 
-  const indexOfLast = currentPage * productsPerPage
-  const indexOfFirst = indexOfLast - productsPerPage
-  const currentProducts = filteredProducts.slice(indexOfFirst, indexOfLast)
-  const totalPages = Math.ceil(filteredProducts.length / productsPerPage)
+  const categories = [...new Set(products.map((p) => p.category))];
+
+  const indexOfLast = currentPage * productsPerPage;
+  const indexOfFirst = indexOfLast - productsPerPage;
+  const currentProducts = filteredProducts.slice(indexOfFirst, indexOfLast);
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 
   const toggleProductSelection = (id) => {
     setSelectedProducts((prev) =>
       prev.includes(id) ? prev.filter((pid) => pid !== id) : [...prev, id]
-    )
-  }
+    );
+  };
 
   const toggleSelectAll = () => {
-    if (selectedProducts.length === currentProducts.length) {
-      setSelectedProducts([])
+    const currentIds = currentProducts.map((p) => p._id);
+    const allSelected = currentIds.every((id) => selectedProducts.includes(id));
+
+    if (allSelected) {
+      setSelectedProducts((prev) =>
+        prev.filter((id) => !currentIds.includes(id))
+      );
     } else {
-      setSelectedProducts(currentProducts.map((p) => p._id))
+      const newSelection = Array.from(
+        new Set([...selectedProducts, ...currentIds])
+      );
+      setSelectedProducts(newSelection);
     }
-  }
+  };
 
   const handleDelete = async (id) => {
-    if (window.confirm("Are you sure you want to delete this product?")) {
-      try {
-        await axios.delete(`${config.API_BASE_URL}/api/products/${id}`)
-        setProducts(products.filter((p) => p._id !== id))
-        setSelectedProducts(selectedProducts.filter((pid) => pid !== id))
-      } catch (err) {
-        alert("Failed to delete product")
-      }
+    // if (!/^[a-f\d]{24}$/i.test(id)) {
+    //   alert("Invalid product ID: " + id);
+    //   return;
+    // }
+
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this product?"
+    );
+    if (!confirmDelete) return;
+
+    try {
+      const response = await axios.delete(
+        `${config.API_BASE_URL}/api/products/${id}`
+      );
+      console.log("Delete successful:", response.data);
+
+      setProducts((prev) => prev.filter((p) => p._id !== id));
+      setSelectedProducts((prev) => prev.filter((pid) => pid !== id));
+    } catch (err) {
+      console.error("Delete error:", err);
+      alert("Failed to delete product. Check console for details.");
     }
-  }
+  };
 
   const handleBulkDelete = async () => {
     if (
@@ -76,20 +99,29 @@ const Products = () => {
     ) {
       try {
         await Promise.all(
-          selectedProducts.map(id =>
+          selectedProducts.map((id) =>
             axios.delete(`${config.API_BASE_URL}/api/products/${id}`)
           )
-        )
-        setProducts(products.filter((p) => !selectedProducts.includes(p._id)))
-        setSelectedProducts([])
+        );
+        setProducts((prev) =>
+          prev.filter((p) => !selectedProducts.includes(p._id))
+        );
+        setSelectedProducts([]);
       } catch (err) {
-        alert("Failed to delete some products")
+        console.error("Bulk delete failed:", err);
+        alert("Failed to delete some products. See console.");
       }
     }
-  }
+  };
 
-  if (loading) return <div className="loading">Loading products...</div>
-  if (error) return <div className="error">Error: {error}</div>
+  if (loading) return <div className="loading">Loading products...</div>;
+  if (error)
+    return (
+      <div className="error">
+        <p>Error: {error}</p>
+        <button onClick={() => window.location.reload()}>Retry</button>
+      </div>
+    );
 
   return (
     <div className="products-container">
@@ -101,7 +133,6 @@ const Products = () => {
       </div>
 
       <div className="card">
-        {/* Filters */}
         <div className="filter-container">
           <div className="search-box">
             <input
@@ -129,7 +160,6 @@ const Products = () => {
           </div>
         </div>
 
-        {/* Bulk actions */}
         {selectedProducts.length > 0 && (
           <div className="bulk-actions">
             <span>{selectedProducts.length} selected</span>
@@ -139,7 +169,6 @@ const Products = () => {
           </div>
         )}
 
-        {/* Table */}
         <div className="table-container">
           <table className="table products-table">
             <thead>
@@ -148,8 +177,10 @@ const Products = () => {
                   <input
                     type="checkbox"
                     checked={
-                      selectedProducts.length === currentProducts.length &&
-                      currentProducts.length > 0
+                      currentProducts.length > 0 &&
+                      currentProducts.every((p) =>
+                        selectedProducts.includes(p._id)
+                      )
                     }
                     onChange={toggleSelectAll}
                   />
@@ -179,7 +210,7 @@ const Products = () => {
                     <td>
                       <img
                         src={
-                          p.images?.[0]
+                          Array.isArray(p.images) && p.images[0]
                             ? config.IMAGE_BASE_URL + p.images[0]
                             : "/placeholder.svg"
                         }
@@ -191,7 +222,7 @@ const Products = () => {
                       {p.deliveryPlatforms?.length > 0 ? (
                         p.deliveryPlatforms.map((platform, i) => (
                           <span key={i} className="platform-badge">
-                            {platform.name}
+                            {platform?.name || platform}
                           </span>
                         ))
                       ) : (
@@ -227,7 +258,6 @@ const Products = () => {
           </table>
         </div>
 
-        {/* Pagination */}
         {totalPages > 1 && (
           <div className="pagination">
             <button
@@ -255,7 +285,7 @@ const Products = () => {
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Products
+export default Products;

@@ -104,63 +104,65 @@ const AddLiveProducts = () => {
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  if (!validateForm()) return;
+    if (!validateForm()) return;
 
-  setIsSubmitting(true);
+    setIsSubmitting(true);
 
-  try {
-    const data = new FormData();
-    data.append("name", formData.name);
-    data.append("price", formData.price);
-    data.append("description", formData.description);
-    data.append("category", formData.category.toLowerCase());
+    try {
+      const data = new FormData();
+      data.append("name", formData.name);
+      data.append("price", formData.price);
+      data.append("description", formData.description);
+      data.append("category", formData.category.toLowerCase());
 
-    // Append main product image
-    if (formData.image) {
-      data.append("images", formData.image);
-    }
-
-    // Prepare and append delivery platforms as JSON string
-    const deliveryPlatformsData = formData.deliveryPlatforms.map(platform => ({
-      name: platform.name,
-      link: platform.link,
-      // Note: The logo path will be handled by the server
-    }));
-    data.append("deliveryPlatforms", JSON.stringify(deliveryPlatformsData));
-
-    // Append each platform logo with the same field name 'platformLogos'
-    formData.deliveryPlatforms.forEach((platform) => {
-      if (platform.logo) {
-        data.append("platformLogos", platform.logo);
+      // Append main product image
+      if (formData.image) {
+        data.append("images", formData.image);
       }
-    });
 
-    const response = await axios.post(
-      "http://localhost:5000/api/Live-products", 
-      data, 
-      {
-        headers: { "Content-Type": "multipart/form-data" },
+      // Prepare and append delivery platforms as JSON string
+      const deliveryPlatformsData = formData.deliveryPlatforms.map(
+        (platform) => ({
+          name: platform.name,
+          link: platform.link,
+          // Note: The logo path will be handled by the server
+        })
+      );
+      data.append("deliveryPlatforms", JSON.stringify(deliveryPlatformsData));
+
+      // Append each platform logo with the same field name 'platformLogos'
+      formData.deliveryPlatforms.forEach((platform) => {
+        if (platform.logo) {
+          data.append("platformLogos", platform.logo);
+        }
+      });
+
+      const response = await axios.post(
+        "http://localhost:5000/api/Live-products",
+        data,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
+
+      if (response.data.success) {
+        setShowSuccess(true);
+        setTimeout(() => {
+          setShowSuccess(false);
+          navigate("/admin/live-products");
+        }, 2000);
+      } else {
+        alert("Failed to add product");
       }
-    );
-
-    if (response.data.success) {
-      setShowSuccess(true);
-      setTimeout(() => {
-        setShowSuccess(false);
-        navigate("/admin/live-products");
-      }, 2000);
-    } else {
-      alert("Failed to add product");
+    } catch (error) {
+      console.error("Error submitting product:", error);
+      alert("Error submitting product");
+    } finally {
+      setIsSubmitting(false);
     }
-  } catch (error) {
-    console.error("Error submitting product:", error);
-    alert("Error submitting product");
-  } finally {
-    setIsSubmitting(false);
-  }
-};
+  };
 
   return (
     <div className="add-product-container">

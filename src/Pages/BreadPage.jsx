@@ -72,7 +72,6 @@ const initialBreadProducts = [
   },
 ];
 
-
 export const BreadPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOption, setSortOption] = useState("recent");
@@ -86,9 +85,7 @@ export const BreadPage = () => {
   };
 
   const filteredProducts = initialBreadProducts
-    .filter((product) =>
-      product.name.toLowerCase().includes(searchTerm)
-    )
+    .filter((product) => product.name.toLowerCase().includes(searchTerm))
     .sort((a, b) => {
       switch (sortOption) {
         case "priceLowHigh":
@@ -119,6 +116,5 @@ export const BreadPage = () => {
     </>
   );
 };
-;
 export { initialBreadProducts };
 export default BreadPage;

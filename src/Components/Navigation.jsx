@@ -31,6 +31,11 @@ export const Navigation = () => {
 
       <div className={`navbar-links ${menuOpen ? "active" : ""}`}>
         <ul className="nav-links">
+        <li>
+            <Link to="/home" style={{ color: "white", textDecoration: "none" }}>
+              HOME
+            </Link>
+          </li>
           <li
             className={`dropdown ${dropdownOpen ? "active" : ""}`}
             onClick={toggleDropdown}
@@ -53,11 +58,6 @@ export const Navigation = () => {
               <li>Live Products</li>
               <li>Gifts & Gourmet</li>
             </ul>
-          </li>
-          <li>
-            <Link to="/home" style={{ color: "white", textDecoration: "none" }}>
-              HOME
-            </Link>
           </li>
           <li>
             <Link

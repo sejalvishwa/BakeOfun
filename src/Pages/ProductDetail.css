@@ -20,8 +20,13 @@
  
 }
 .share-section-project button{
-  background-color: #0d6efd;
-  color: #fff;
+  background-color: #483d8b; 
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-weight: 600;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
 }
 
 
@@ -45,6 +50,22 @@
 
 .platform-logos img:hover {
   transform: scale(1.05);
+}
+
+.bulk-enquiry {
+  display: inline-block;
+  background-color: #483d8b;
+  color: white;
+  text-decoration: none;
+  padding: 10px 80px;
+  font-weight: 600;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+  margin-top: 2rem;
+}
+
+.bulk-enquiry:hover {
+  background-color: #322b5e;
 }
 
 .product-description-section {

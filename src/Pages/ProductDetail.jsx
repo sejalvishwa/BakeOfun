@@ -37,8 +37,12 @@ export const ProductDetail = () => {
                 height: "auto",
                 cursor: "zoom-in",
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.2)")}
-              onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.transform = "scale(1.2)")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.transform = "scale(1)")
+              }
             />
           </div>
 
@@ -50,7 +54,7 @@ export const ProductDetail = () => {
             </div>
 
             <div className="share-section-project">
-              <button className="btn btn-outline-primary">Share</button>
+              <button>Share</button>
             </div>
 
             <div className="availability mt-4">
@@ -60,6 +64,11 @@ export const ProductDetail = () => {
                 <img src={swiggyLogo} alt="Swiggy" />
               </div>
             </div>
+
+           <div>
+  <a href="/enquries" className="bulk-enquiry">Bulk Enquiry</a>
+</div>
+
 
             <div className="product-description-section mt-5 ">
               <h5 className="description-heading">Product Description :</h5>
@@ -72,7 +81,11 @@ export const ProductDetail = () => {
         <hr className="my-5" />
         <div className="you-may-also-like">
           <h2 className="mb-4">You May Also Like</h2>
-          <FeaturedProducts products={recommendations} showTitle={false} showPrice={true} />
+          <FeaturedProducts
+            products={recommendations}
+            showTitle={false}
+            showPrice={true}
+          />
         </div>
       </div>
 

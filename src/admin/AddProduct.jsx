@@ -178,18 +178,18 @@ const AddProduct = () => {
   return (
     <div className="add-product-container">
       <div className="add-product-header">
-        <h1 className="page-title">Add Live Product</h1>
+        <h1 className="page-title">Add Product</h1>
         <button
           className="btn btn-secondary"
           onClick={() => navigate("/admin/products")}
         >
-          Back to Live Products
+          Back to Products
         </button>
       </div>
 
       {showSuccess && (
         <div className="alert alert-success">
-          Live product added successfully!
+          Product added successfully!
         </div>
       )}
 
@@ -371,7 +371,7 @@ const AddProduct = () => {
               className="btn btn-primary"
               disabled={isSubmitting}
             >
-              {isSubmitting ? "Saving..." : "Save Live Product"}
+              {isSubmitting ? "Saving..." : "Save Product"}
             </button>
           </div>
         </form>

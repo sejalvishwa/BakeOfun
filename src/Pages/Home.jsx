@@ -20,7 +20,7 @@ import YellowLine from "../assets/images/yellowBackground.png";
 import banner1 from "../assets/images/AboutBanner1.jpg";
 import banner2 from "../assets/images/AboutBanner2.jpg";
 import banner3 from "../assets/images/AboutBanner3.jpg";
-import { AboutUsSection } from "../Components/AboutUsSection";  
+import { AboutUsSection } from "../Components/AboutUsSection";
 import { homeProducts } from "../data/homeProducts";
 import BakeryBanner from "../Components/BakeryBanner";
 import { OurForte } from "../Components/OurForte";
@@ -35,36 +35,39 @@ const aboutUsTitle = "A Li'l bit About Us";
 const aboutUsParagraphs = [
   [
     "BakeOFun is an International Quality Food Brand trusted &",
-    "acclaimed by Thousands of customers."
+    "acclaimed by Thousands of customers.",
   ],
   [
     "Our ultimate goal is entice our customers & associates with our",
     "honesty, love & purpose in all our endeavours serving Pure, Safe,",
-    "Healthy & Hygienic food products."
-  ]
+    "Healthy & Hygienic food products.",
+  ],
 ];
 
 const forte = [
   {
     title: "QUALITY",
-    description: "Handpicked Ingredients to compliment purity & taste. Top Notch packaging for optimum shelf life",
-    icon: qualityImage
+    description:
+      "Handpicked Ingredients to compliment purity & taste. Top Notch packaging for optimum shelf life",
+    icon: qualityImage,
   },
   {
     title: "HYGIENE",
     description: "FSSAI, ISO 22000, HACCP Compliant Plant & Operations",
-    icon: HygieneImage
+    icon: HygieneImage,
   },
   {
     title: "TASTE",
-    description: "A wide gamut of tantalizing flavors offered for every palate. Right blend of a variety of Quality Dry Fruit & Nuts",
-    icon: tasteImage
+    description:
+      "A wide gamut of tantalizing flavors offered for every palate. Right blend of a variety of Quality Dry Fruit & Nuts",
+    icon: tasteImage,
   },
   {
     title: "HEALTH",
-    description: "Nutritionally sound products with cautious amount of Salt, Sugar & additives",
-    icon: healthImage
-  }
+    description:
+      "Nutritionally sound products with cautious amount of Salt, Sugar & additives",
+    icon: healthImage,
+  },
 ];
 
 export const Home = () => {
@@ -92,19 +95,25 @@ export const Home = () => {
   return (
     <>
       <Navigation />
-      <div className="banner-container">
-        {mainBanner ? (
-          <img
-            src={`${API_URL}${mainBanner.image}`}
-            alt="Homepage Banner"
-            className="banner-img"
-          />
-        ) : (
-          <img src={bannerImage} alt="Default Banner" className="banner-img" />
-        )}
-        <div className="banner-bottom">
-          <a href="#"><button className="shop-button">SHOP NOW</button></a>
-        </div>
+ <div className="banner-container">
+  {/* 
+  {mainBanner ? (
+    <img
+      src={`${API_URL}${mainBanner.image}`}
+      alt="Homepage Banner"
+      className="banner-img"
+    />
+  ) : ( 
+  */}
+    <img src={bannerImage} alt="Default Banner" className="banner-img" />
+  {/* )} */}
+
+  <div className="banner-bottom">
+    <a href="/liveproducts">
+      <button className="shop-button">SHOP NOW</button>
+    </a>
+</div>
+
 
         <AboutUsSection
           title={aboutUsTitle}
@@ -119,7 +128,11 @@ export const Home = () => {
           <img src={YellowLine} alt="Yellow Line" className="yellow-line" />
         </div>
 
-        <FeaturedProducts products={homeProducts} showTitle={true} showPrice={false} />
+        <FeaturedProducts
+          products={homeProducts}
+          showTitle={true}
+          showPrice={false}
+        />
 
         <div className="our-focus-section">
           <h1>OUR FOCUS : GOOD WORK</h1>
@@ -128,15 +141,21 @@ export const Home = () => {
         <div className="why-choose-us">
           <div className="feature-card">
             <img src={machineryIcon} alt="Advanced Plant and Machinery" />
-            <p>STATE OF THE ART <br /> ADVANCED PLANT AND MACHINERY</p>
+            <p>
+              STATE OF THE ART <br /> ADVANCED PLANT AND MACHINERY
+            </p>
           </div>
           <div className="feature-card">
             <img src={workforceIcon} alt="Trained Workforce" />
-            <p>TRAINED, QUALITY CENTRIC <br /> WORKFORCE</p>
+            <p>
+              TRAINED, QUALITY CENTRIC <br /> WORKFORCE
+            </p>
           </div>
           <div className="feature-card">
             <img src={foodSafetyIcon} alt="Food Safety Standards" />
-            <p>STRICT COMPLIANCE TO FOOD <br /> SAFETY STANDARDS</p>
+            <p>
+              STRICT COMPLIANCE TO FOOD <br /> SAFETY STANDARDS
+            </p>
           </div>
         </div>
 
