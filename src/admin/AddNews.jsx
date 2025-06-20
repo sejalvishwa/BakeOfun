@@ -102,13 +102,9 @@ const AddNews = () => {
       newErrors.publishedBy = "Published by is required";
     if (!formData.publishedDate)
       newErrors.publishedDate = "Published date is required";
-    if (
-      formData.images.length === 0 &&
-      formData.existingImages.length === 0
-    )
+    if (formData.images.length === 0 && formData.existingImages.length === 0)
       newErrors.image = "At least one news image is required";
-    if (!formData.section)
-      newErrors.section = "Please select a section";
+    if (!formData.section) newErrors.section = "Please select a section";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -127,8 +123,6 @@ const AddNews = () => {
       data.append("publishedBy", formData.publishedBy.trim());
       data.append("publishedDate", formData.publishedDate);
       data.append("section", formData.section);
-
-      // ✅ Set isFeatured based on radio selection
       data.append("isFeatured", formData.section === "featured");
 
       formData.images.forEach((file) => {
@@ -266,7 +260,9 @@ const AddNews = () => {
 
           <div className="form-group">
             <label className="form-label">Description *</label>
-            <div className={`form-control ${errors.description ? "error" : ""}`}>
+            <div
+              className={`form-control ${errors.description ? "error" : ""}`}
+            >
               <ReactQuill
                 value={formData.description}
                 onChange={(value) =>
@@ -294,10 +290,24 @@ const AddNews = () => {
             )}
           </div>
 
+          {/* ✅ Inline styled radio buttons */}
           <div className="form-group">
             <label className="form-label">Show in Section *</label>
-            <div className="radio-group">
-              <label>
+            <div
+              style={{
+                display: "flex",
+                gap: "20px",
+                marginTop: "8px",
+              }}
+            >
+              <label
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "5px",
+                  fontWeight: 500,
+                }}
+              >
                 <input
                   type="radio"
                   name="section"
@@ -307,7 +317,14 @@ const AddNews = () => {
                 />
                 Featured Story
               </label>
-              <label>
+              <label
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "5px",
+                  fontWeight: 500,
+                }}
+              >
                 <input
                   type="radio"
                   name="section"
