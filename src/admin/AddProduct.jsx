@@ -27,7 +27,7 @@ const AddProduct = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
-  const categories = ["Bread", "Rusk", "Cookies", "Cakes", "Pastries", "Others"];
+  const categories = ["Bread", "Rusk", "Cookies", "Cakes", "Other"];
 
   useEffect(() => {
     if (product_id) {
@@ -53,9 +53,7 @@ const AddProduct = () => {
             })),
           });
 
-          setPreviewImage(
-            product.images?.[0] ? `${product.images[0]}` : ""
-          );
+          setPreviewImage(product.images?.[0] ? `${product.images[0]}` : "");
         })
         .catch((err) => {
           console.error("Error fetching product:", err);
@@ -209,7 +207,7 @@ const AddProduct = () => {
     } catch (error) {
       console.error("Error submitting product:", error);
       alert("Error submitting product");
-    } finally { 
+    } finally {
       setIsSubmitting(false);
     }
   };

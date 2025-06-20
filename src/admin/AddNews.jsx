@@ -290,7 +290,7 @@ const AddNews = () => {
             )}
           </div>
 
-          {/* ✅ Inline styled radio buttons */}
+          
           <div className="form-group">
             <label className="form-label">Show in Section *</label>
             <div
