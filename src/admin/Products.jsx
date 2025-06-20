@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import "./Products.css";
 import { config } from "../config/config.js";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -13,7 +15,6 @@ const Products = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterCategory, setFilterCategory] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedProducts, setSelectedProducts] = useState([]);
 
   const productsPerPage = 5;
 
@@ -23,9 +24,11 @@ const Products = () => {
         const response = await axios.get(`${config.API_BASE_URL}/api/products`);
         setProducts(response.data.data);
         setLoading(false);
+        // toast.success("Products loaded successfully"); // Removed as requested
       } catch (err) {
         setError(err.message);
         setLoading(false);
+        toast.error("Failed to load products");
       }
     };
 
@@ -45,76 +48,22 @@ const Products = () => {
   const currentProducts = filteredProducts.slice(indexOfFirst, indexOfLast);
   const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 
-  const toggleProductSelection = (id) => {
-    setSelectedProducts((prev) =>
-      prev.includes(id) ? prev.filter((pid) => pid !== id) : [...prev, id]
-    );
-  };
-
-  const toggleSelectAll = () => {
-    const currentIds = currentProducts.map((p) => p._id);
-    const allSelected = currentIds.every((id) => selectedProducts.includes(id));
-
-    if (allSelected) {
-      setSelectedProducts((prev) =>
-        prev.filter((id) => !currentIds.includes(id))
-      );
-    } else {
-      const newSelection = Array.from(
-        new Set([...selectedProducts, ...currentIds])
-      );
-      setSelectedProducts(newSelection);
-    }
-  };
-
   const handleDelete = async (id) => {
-    // if (!/^[a-f\d]{24}$/i.test(id)) {
-    //   alert("Invalid product ID: " + id);
-    //   return;
-    // }
-
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this product?"
-    );
+    const confirmDelete = window.confirm("Are you sure you want to delete this product?");
     if (!confirmDelete) return;
 
     try {
-      const response = await axios.delete(
-        `${config.API_BASE_URL}/api/products/${id}`
-      );
-      console.log("Delete successful:", response.data);
-
+      await axios.delete(`${config.API_BASE_URL}/api/products/${id}`);
       setProducts((prev) => prev.filter((p) => p._id !== id));
-      setSelectedProducts((prev) => prev.filter((pid) => pid !== id));
+      toast.success("Product deleted successfully!");
     } catch (err) {
       console.error("Delete error:", err);
-      alert("Failed to delete product. Check console for details.");
-    }
-  };
-
-  const handleBulkDelete = async () => {
-    if (
-      selectedProducts.length > 0 &&
-      window.confirm(`Delete ${selectedProducts.length} selected products?`)
-    ) {
-      try {
-        await Promise.all(
-          selectedProducts.map((id) =>
-            axios.delete(`${config.API_BASE_URL}/api/products/${id}`)
-          )
-        );
-        setProducts((prev) =>
-          prev.filter((p) => !selectedProducts.includes(p._id))
-        );
-        setSelectedProducts([]);
-      } catch (err) {
-        console.error("Bulk delete failed:", err);
-        alert("Failed to delete some products. See console.");
-      }
+      toast.error("Failed to delete product!");
     }
   };
 
   if (loading) return <div className="loading">Loading products...</div>;
+
   if (error)
     return (
       <div className="error">
@@ -125,6 +74,8 @@ const Products = () => {
 
   return (
     <div className="products-container">
+      <ToastContainer position="top-right" autoClose={3000} />
+
       <div className="products-header">
         <h1 className="page-title">Products</h1>
         <Link to="/admin/add-product" className="btn btn-primary">
@@ -160,31 +111,10 @@ const Products = () => {
           </div>
         </div>
 
-        {selectedProducts.length > 0 && (
-          <div className="bulk-actions">
-            <span>{selectedProducts.length} selected</span>
-            <button className="btn btn-danger" onClick={handleBulkDelete}>
-              <span className="material-icons">delete</span> Delete Selected
-            </button>
-          </div>
-        )}
-
         <div className="table-container">
           <table className="table products-table">
             <thead>
               <tr>
-                <th>
-                  <input
-                    type="checkbox"
-                    checked={
-                      currentProducts.length > 0 &&
-                      currentProducts.every((p) =>
-                        selectedProducts.includes(p._id)
-                      )
-                    }
-                    onChange={toggleSelectAll}
-                  />
-                </th>
                 <th>Name</th>
                 <th>Category</th>
                 <th>Price</th>
@@ -197,13 +127,6 @@ const Products = () => {
               {currentProducts.length > 0 ? (
                 currentProducts.map((p) => (
                   <tr key={p._id}>
-                    <td>
-                      <input
-                        type="checkbox"
-                        checked={selectedProducts.includes(p._id)}
-                        onChange={() => toggleProductSelection(p._id)}
-                      />
-                    </td>
                     <td>{p.name}</td>
                     <td>{p.categoryTitle || p.category}</td>
                     <td>₹{p.price.toFixed(2)}</td>
@@ -211,7 +134,7 @@ const Products = () => {
                       <img
                         src={
                           Array.isArray(p.images) && p.images[0]
-                            ? config.IMAGE_BASE_URL + p.images[0]
+                            ?  p.images[0]
                             : "/placeholder.svg"
                         }
                         alt={p.name}
@@ -232,13 +155,13 @@ const Products = () => {
                     <td>
                       <div className="action-buttons">
                         <Link
-                          to={`/admin/edit-product/${p._id}`}
-                          className="action-btn edit"
+                          to={`/admin/add-product/?product_id=${p._id}`}
+                          className="action-icon edit"
                         >
                           <span className="material-icons">edit</span>
                         </Link>
                         <button
-                          className="action-btn delete"
+                          className="action-icon delete"
                           onClick={() => handleDelete(p._id)}
                         >
                           <span className="material-icons">delete</span>
@@ -249,7 +172,7 @@ const Products = () => {
                 ))
               ) : (
                 <tr>
-                  <td colSpan="7" className="no-products">
+                  <td colSpan="6" className="no-products">
                     No products found.
                   </td>
                 </tr>

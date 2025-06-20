@@ -188,6 +188,10 @@
   padding: 10px 20px;
 }
 
+.checkbox-group{
+  gap:3rem;
+}
+
 /* Responsive Design */
 @media (max-width: 992px) {
   .form-grid {

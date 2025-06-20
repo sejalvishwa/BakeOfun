@@ -1,24 +1,47 @@
 import "./ProductDetail.css";
 import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import { Navigation } from "../Components/Navigation";
 import { Footer } from "../Components/Footer";
 import { FeaturedProducts } from "../Components/FeaturedProducts";
+import { config } from "../config/config";
 import zomatoLogo from "../assets/images/zomato_logo.png";
 import swiggyLogo from "../assets/images/swiggy_logo.png";
-import { products } from "../data/products";
-import { homeProducts } from "../data/homeProducts";
+import { FiShare2 } from "react-icons/fi";
 
 export const ProductDetail = () => {
   const { slug } = useParams();
+  const [product, setProduct] = useState(null);
+  const [allProducts, setAllProducts] = useState([]);
 
-  const fromHome = homeProducts.find((p) => p.slug === slug);
-  const fromLive = products.find((p) => p.slug === slug);
-  const product = fromHome || fromLive;
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const response = await axios.get(
+          `${config.API_BASE_URL}/api/live-products`
+        );
+        const all = response.data.data;
+        const active = all.filter((p) => p.isActive);
+        const matchedProduct = active.find((p) => p.slug === slug);
 
-  const sameSource = fromHome ? homeProducts : products;
-  const recommendations = sameSource.filter((p) => p.slug !== slug).slice(0, 4);
+        setProduct(matchedProduct);
+        setAllProducts(active);
+      } catch (error) {
+        console.error("Error fetching product:", error);
+      }
+    };
 
-  if (!product) return <p className="text-center mt-5">Product not found.</p>;
+    fetchProduct();
+  }, [slug]);
+
+  if (!product) {
+    return <p className="text-center mt-5">Product not found.</p>;
+  }
+
+  const recommendations = allProducts
+    .filter((p) => p.slug !== slug)
+    .slice(0, 4);
 
   return (
     <>
@@ -29,7 +52,7 @@ export const ProductDetail = () => {
           {/* Product Image */}
           <div className="col-md-6 mb-4 zoom-container">
             <img
-              src={product.image}
+              src={`${product.images[0]}`}
               alt={product.name}
               className="img-fluid rounded zoom-on-hover"
               style={{
@@ -50,25 +73,38 @@ export const ProductDetail = () => {
           <div className="col-md-6 product-info">
             <div className="product-header">
               <h2>{product.name}</h2>
-              <p className="price">{product.price}</p>
+              <p className="price">₹{product.price}</p>
             </div>
 
             <div className="share-section-project">
-              <button>Share</button>
+              <button> <FiShare2 size={18} /></button>
             </div>
 
             <div className="availability mt-4">
               <h5>Available on:</h5>
               <div className="platform-logos">
-                <img src={zomatoLogo} alt="Zomato" />
-                <img src={swiggyLogo} alt="Swiggy" />
+                {product.deliveryPlatforms.map((platform, idx) => (
+                  <a
+                    key={idx}
+                    href={platform.link}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <img
+                      src={`${platform.logo}`}
+                      alt={platform.name}
+                      style={{ marginRight: "10px" }}
+                    />
+                  </a>
+                ))}
               </div>
             </div>
 
-           <div>
-  <a href="/enquries" className="bulk-enquiry">Bulk Enquiry</a>
-</div>
-
+            <div>
+              <a href="/enquries" className="bulk-enquiry">
+                Bulk Enquiry
+              </a>
+            </div>
 
             <div className="product-description-section mt-5 ">
               <h5 className="description-heading">Product Description :</h5>

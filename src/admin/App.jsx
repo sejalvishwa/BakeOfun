@@ -18,6 +18,9 @@ import Banners from "./Banners";
 import LiveProducts from "./LiveProducts";
 import Contact from "./Contact";
 import AddLiveProducts from "./AddLiveProducts";
+import News from "./News";
+import AddNews from "./AddNews";
+
 
 // Create theme
 const theme = createTheme({
@@ -86,6 +89,8 @@ function App() {
                   <Route path="live-products" element={<LiveProducts />} />
                   <Route path="add-liveproducts" element={<AddLiveProducts />} />
                   <Route path="contact" element={<Contact />} />
+                  <Route path="news" element={<News />} />
+                  <Route path="add-news" element={<AddNews />} />
                   <Route path="*" element={<Navigate to="" replace />} />
                 </Routes>
               </Box>

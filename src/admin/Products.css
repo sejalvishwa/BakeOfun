@@ -139,22 +139,22 @@
   transition: background-color 0.3s;
 }
 
-.action-btn.edit {
+.action-icon.edit {
   background-color: rgba(10, 42, 138, 0.1);
   color: #0a2a8a;
 }
 
-.action-btn.edit:hover {
+.action-icon.edit:hover {
   background-color: rgba(10, 42, 138, 0.2);
 }
 
-.action-btn.delete {
+.action-icon.delete {
   background-color: rgba(220, 53, 69, 0.1);
-  color: #dc3545;
+  color: #dc3545 !important;
 }
 
-.action-btn.delete:hover {
-  background-color: rgba(220, 53, 69, 0.2);
+.action-icon.delete:hover {
+  color: #dc3545 !important;
 }
 
 .action-btn .material-icons {

@@ -1,16 +1,19 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./LiveProducts.css";
 import { config } from "../config/config.js";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const LiveProducts = () => {
   const [products, setProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterCategory, setFilterCategory] = useState("");
   const [refreshing, setRefreshing] = useState(false);
+  const toastShownRef = useRef(false); // ✅ To prevent multiple toast messages
 
   const categories = [...new Set(products.map((product) => product.category))];
 
@@ -37,6 +40,22 @@ const LiveProducts = () => {
     }, 1500);
   };
 
+  const handleDelete = async (id) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this product?"
+    );
+    if (!confirmDelete) return;
+
+    try {
+      await axios.delete(`${config.API_BASE_URL}/api/live-products/${id}`);
+      setProducts((prev) => prev.filter((product) => product._id !== id));
+      toast.success("Product deleted successfully!");
+    } catch (error) {
+      console.error("Error deleting product:", error);
+      toast.error("Failed to delete the product. Please try again.");
+    }
+  };
+
   useEffect(() => {
     const interval = setInterval(() => {
       if (!refreshing) {
@@ -57,10 +76,18 @@ const LiveProducts = () => {
           ? productData
           : [productData];
         setProducts(dataArray);
+
+        // ✅ Show toast only once
+        if (!toastShownRef.current) {
+          // toast.success("Live products loaded successfully!");
+          toastShownRef.current = true;
+        }
+
         console.log("Fetched Products:", dataArray);
       } catch (error) {
         console.error("Error fetching live products:", error);
         setProducts([]);
+        toast.error("Failed to load live products.");
       }
     };
 
@@ -69,23 +96,12 @@ const LiveProducts = () => {
 
   return (
     <div className="live-products-container">
+      <ToastContainer position="top-right" autoClose={3000} />
       <div className="live-products-header">
         <h1 className="page-title">Live Products</h1>
         <Link to="/admin/add-liveproducts" className="btn btn-primary">
           <span className="material-icons">add</span>Add Live Product
         </Link>
-      </div>
-
-      <div className="stats-container">
-        <div className="stat-card">
-          <div className="stat-icon" style={{ backgroundColor: "#17a2b8" }}>
-            <span className="material-icons">inventory_2</span>
-          </div>
-          <div className="stat-info">
-            <h3 className="stat-value">{totalProducts}</h3>
-            <p className="stat-title">Live Products</p>
-          </div>
-        </div>
       </div>
 
       <div className="card">
@@ -126,6 +142,7 @@ const LiveProducts = () => {
                 <th>Price</th>
                 <th>Last Updated</th>
                 <th>Platforms</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -138,7 +155,7 @@ const LiveProducts = () => {
                           <img
                             src={
                               product.images && product.images.length > 0
-                                ? `${config.IMAGE_BASE_URL}${product.images[0]}`
+                                ? `${product.images[0]}`
                                 : "/placeholder.svg"
                             }
                             alt={product.name}
@@ -180,7 +197,7 @@ const LiveProducts = () => {
                             }}
                           >
                             <img
-                              src={`${config.IMAGE_BASE_URL}${platform.logo}`}
+                              src={`${platform.logo}`}
                               alt={platform.name}
                               style={{ height: "20px", marginRight: "4px" }}
                             />
@@ -191,11 +208,29 @@ const LiveProducts = () => {
                         <span className="platform-tag none">None</span>
                       )}
                     </td>
+                    <td>
+                      <div className="actions">
+                        <Link
+                          to={`/admin/add-liveproducts/?product_id=${product._id}`}
+                          className="action-icon edit"
+                          title="Edit"
+                        >
+                          <span className="material-icons">edit</span>
+                        </Link>
+                        <button
+                          onClick={() => handleDelete(product._id)}
+                          className="action-icon delete"
+                          title="Delete"
+                        >
+                          <span className="material-icons">delete</span>
+                        </button>
+                      </div>
+                    </td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan="5" className="no-products">
+                  <td colSpan="6" className="no-products">
                     No live products found.
                   </td>
                 </tr>

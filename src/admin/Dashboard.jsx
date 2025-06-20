@@ -105,7 +105,9 @@ const Dashboard = () => {
 
     const fetchLiveProductsCount = async () => {
       try {
-        const response = await axios.get(`${config.API_BASE_URL}/api/live-products`);
+        const response = await axios.get(
+          `${config.API_BASE_URL}/api/live-products`
+        );
         const liveProducts = response.data.data || [];
         const activeCount = liveProducts.filter((p) => p.isActive).length;
 
@@ -153,7 +155,9 @@ const Dashboard = () => {
             <h2 className="card-title" style={{ color: "#ffffff" }}>
               Recent Products
             </h2>
-            <Link to="/admin/products" className="btn btn-primary">View All</Link>
+            <Link to="/admin/products" className="btn btn-primary">
+              View All
+            </Link>
           </div>
           <div className="table-container">
             <table className="table">
@@ -173,7 +177,11 @@ const Dashboard = () => {
                     <td>{product.name}</td>
                     <td>{product.category}</td>
                     <td>
-                      <span className={`status-badge ${product.status?.toLowerCase() || "active"}`}>
+                      <span
+                        className={`status-badge ${
+                          product.status?.toLowerCase() || "active"
+                        }`}
+                      >
                         {product.status || "Active"}
                       </span>
                     </td>
@@ -191,7 +199,9 @@ const Dashboard = () => {
             <h2 className="card-title" style={{ color: "#ffffff" }}>
               Recent Contacts
             </h2>
-            <Link to="/admin/contact" className="btn btn-primary">View All</Link>
+            <Link to="/admin/contact" className="btn btn-primary">
+              View All
+            </Link>
           </div>
           <div className="table-container">
             {error ? (
@@ -234,7 +244,8 @@ const Dashboard = () => {
             <span className="material-icons">add_circle</span> Add Product
           </Link>
           <Link to="/admin/banners" className="action-btn">
-            <span className="material-icons">add_photo_alternate</span> Add Banner
+            <span className="material-icons">add_photo_alternate</span> Add
+            Banner
           </Link>
           <Link to="/admin/products" className="action-btn">
             <span className="material-icons">inventory_2</span> Manage Products

@@ -1,377 +1,415 @@
+/* AboutUs.css - Updated with full responsive styles */
+
+/* Base Styles */
 body, html {
   margin: 0;
   padding: 0;
+  font-family: 'Arial', sans-serif;
 }
 
-/* .about-us-page {
-  background-image: url('../assets/images/AboutUsborder.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 100vh; 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  margin-top: -10px;
+/* About Section */
+.about-section {
+  padding: 80px 0;
+  background-color: #F8F8F8;
+  margin-top: -1rem;
 }
 
-.about-us-text {
-  max-width: 75%;  
-  height: auto;
-  object-fit: contain;
-
-} */
-
- .about-section {
-            padding: 80px 0;
-            background-color: #F8F8F8;
-            margin-top: -1rem;
-        }
-        
-        .about-title {
-            font-size: 2.5rem;
-            font-weight: 400;
-            color: #10256F;
-            margin-bottom: 2rem;
-            letter-spacing: 0.05em;
-        }
-        
-        .about-subtitle {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #374151;
-            margin-bottom: 3rem;
-        }
-        
-        .about-text {
-            font-size: 1rem;
-            line-height: 1.8;
-            color: #4b5563;
-            margin-bottom: 1.5rem;
-        }
-        
-        .about-content {
-            max-width: 700px;
-        }
-        
-        @media (max-width: 768px) {
-            .about-title {
-                font-size: 2.5rem;
-            }
-            
-            .about-subtitle {
-                font-size: 1.25rem;
-            }
-            
-            .about-text {
-                font-size: 1rem;
-            }
-        }
-
-.plant-section{
-  margin-top: -2rem;
-}
-
-.yellow-border {
-  width: 100vw; /* Full viewport width */
-  position: relative;
-  left: 0;
-  right: 0;
-  margin-left: 1rem;
-}
-
-.the-brand{
+.about-title {
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  font-weight: 400;
+  color: #10256F;
   margin-bottom: 2rem;
+  letter-spacing: 0.05em;
 }
 
+.about-subtitle {
+  font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 3rem;
+}
 
-.Banner-image img{
-  width: 100%;
-  height: 35rem;
+.about-text {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #4b5563;
+  margin-bottom: 1.5rem;
+}
+
+.about-content {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* The Brand Section */
+.the-brand {
+  margin-bottom: 2rem;
 }
 
 .logo {
   text-align: left;
-  padding-left: 50px; 
+  padding-left: 50px;
 }
 
 .logo img {
   margin-top: 3.5rem;
   width: 100%;
-  max-width: 400px; 
+  max-width: 400px;
+  height: auto;
 }
 
-
-.about-logo-right h2{
-    margin-top: 70px;
-    color: #2C2C93;
-    font-size: 28px;
-}
-
-.about-logo-section{
+.about-logo-section {
   margin-right: 4rem;
 }
 
-.trusted-para p{
-    margin-top: 30px;
-    font-size: 16px;
-    font-weight: 500;
+.about-logo-right h2 {
+  margin-top: 70px;
+  color: #2C2C93;
+  font-size: 28px;
 }
 
-.ultimate-goal-para p{
- margin-top: 30px;
-    font-size: 16px;
-    font-weight: 500;
+.trusted-para p,
+.ultimate-goal-para p {
+  margin-top: 30px;
+  font-size: 16px;
+  font-weight: 500;
 }
 
-.breadImage{
-  margin-top: 0.3rem;
+/* Plant Section */
+.plant-section {
+  margin-top: -2rem;
+  background-color: #F8F8F8;
 }
 
-.breadImage img{
-  width: 70%;
-  margin-left: 4rem;
-}
-
-.our-plant h2{
+.our-plant h2 {
   color: #ffc107;
   margin-top: 30px;
+  font-size: 28px;
 }
 
-.plant-para-section{
+.plant-para-section {
   margin-top: 30px;
 }
 
-.manuacturing-unit-para p{
-font-weight: 600;
+.manuacturing-unit-para p {
+  font-weight: 600;
 }
 
-.our-reach-main{
+.breadImage {
+  margin-top: 0.3rem;
+  text-align: center;
+}
+
+.breadImage img {
+  width: 70%;
+  margin-left: 4rem;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Our Reach Section */
+.our-reach-main {
   margin-bottom: 4rem;
   margin-top: -3rem;
+  background-color: #F8F3F0;
 }
 
-.Our-reach-heading h2{
+.Our-reach-heading h2 {
   margin-top: 60px;
   color: #2C2C93;
+  font-size: 28px;
 }
 
-.reach-section{
- padding-left: 80px;
-}
-
-.our-reach-para1{
+.our-reach-para1 {
   margin-top: 20px;
   font-weight: 600;
 }
 
-.smallBadge img{
-    width: 80%;
+.BigBadge {
+  text-align: center;
 }
 
-.reach-recognition h4{
-    color: #ffc107;
-    
-}
-.reach-recognition p{
-   margin-top: 20px;
-    
-}
-
-.BigBadge img{
-  /* margin-left: rem; */
+.BigBadge img {
   width: 100%;
   padding: 2rem;
+  max-width: 400px;
+  height: auto;
+  display: block;
+  margin: 2rem auto 0 auto;
 }
 
-/* iPad / Tablet (<= 1024px) */
-@media (max-width: 1024px) {
-  .logo img {
-    margin-top: 5rem;
-    margin-right: 0;
-    width: 80%;
-  }
+.smallBadge {
+  text-align: center;
+}
 
+.smallBadge img {
+  width: 80%;
+  max-width: 100px;
+  height: auto;
+}
+
+.reach-recognition h4 {
+  color: #ffc107;
+  font-size: 18px;
+}
+
+.reach-recognition p {
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+/* Carousel */
+.carousel {
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  overflow: hidden;
+}
+
+.carousel img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Responsive Adjustments */
+
+/* iPad (768px - 1024px) */
+@media (max-width: 1024px) {
+  .about-section {
+    padding: 60px 20px;
+  }
+  
+  .logo {
+    padding-left: 30px;
+  }
+  
+  .logo img {
+    margin-top: 2rem;
+    max-width: 350px;
+  }
+  
+  .about-logo-section {
+    margin-right: 2rem;
+    padding-right: 20px;
+  }
+  
   .about-logo-right h2 {
     margin-top: 40px;
-    font-size: 28px;
   }
-
-  .trusted-para p,
-  .ultimate-goal-para p {
-    margin-top: 20px;
-    font-size: 18px;
-  }
-
-  .breadImage {
-    margin-top: 40px;
-    text-align: center;
-
-  }
-
+  
   .breadImage img {
-    width: 3rem;
-   
+    width: 80%;
+    margin-left: 2rem;
   }
-
-  .our-plant h2 {
-    margin-top: 60px;
-    font-size: 28px;
-  }
-
-  .plant-para-section {
-    margin-top: 20px;
-    padding: 0 10px;
-  }
-
-  .manuacturing-unit-para p {
-    font-weight: 600;
-    font-size: 16px;
-  }
-
+  
   .our-reach-main {
-    margin-bottom: 3rem;
-    padding: 0 10px;
+    padding: 0 20px;
+  }
+  
+  .BigBadge img {
+    padding: 1rem;
+  }
+  
+  .reach-recognition {
+    padding-left: 15px;
   }
 
-  .Our-reach-heading h2 {
-    margin-top: 40px;
-    font-size: 28px;
+   .our-reach-main .row {
+    flex-direction: column !important;
   }
 
-  .our-reach-para1 {
-    margin-top: 15px;
-    font-weight: 600;
-    font-size: 16px;
+    .our-reach-main .BigBadge {
+    order: -1; /* Moves image to top */
+    margin-bottom: 20px;
+    text-align: center;
   }
 
-
-  .smallBadge img {
-    width: 60%;
+    .our-reach-main .col-7 {
+    order: 1;
   }
 
-  .reach-recognition h4 {
-    font-size: 18px;
+  .our-reach-main .reach-recognition {
+    order: 1;
   }
 
-  .reach-recognition p {
-    margin-top: 15px;
+  .our-reach-main .Our-reach-heading {
+    order: 2;
+  }
+
+  .our-reach-main .our-reach-para1 {
+    order: 3;
+  }
+}
+
+/* Mobile (up to 767px) */
+@media (max-width: 767px) {
+  body, html {
     font-size: 14px;
   }
-
-  .BigBadge img {
-    margin-left: 0;
-    width: 80%;
-    display: block;
-    margin: 2rem auto 0 auto;
+  
+  .about-section {
+    padding: 40px 15px;
   }
-}
-
-/* Mobile (<= 768px) */
-@media (max-width: 768px) {
+  
+  .about-title {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .about-subtitle {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+  }
+  
+  .about-text {
+    font-size: 0.9rem;
+  }
+  
+  /* The Brand Section - Mobile */
+  .the-brand .row {
+    flex-direction: column;
+  }
+  
+  .logo {
+    padding-left: 0;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
   .logo img {
-    margin-top: 3rem;
-    width: 100%;
-    margin-right: 0;
+    margin-top: 1rem;
+    max-width: 280px;
   }
-
+  
+  .about-logo-section {
+    margin-right: 0;
+    padding: 0 15px;
+    text-align: center;
+  }
+  
   .about-logo-right h2 {
-    margin-top: 30px;
+    margin-top: 20px;
+    font-size: 24px;
+  }
+  
+  .trusted-para p,
+  .ultimate-goal-para p {
+    margin-top: 15px;
+    font-size: 15px;
+  }
+  
+  /* Plant Section - Mobile */
+  .plant-section {
+    padding: 30px 15px;
+  }
+  
+  .plant-section .row {
+    flex-direction: column-reverse;
+  }
+  
+  .our-plant h2 {
+    margin-top: 20px;
     font-size: 24px;
     text-align: center;
   }
-
-  .trusted-para p,
-  .ultimate-goal-para p {
-    margin-top: 15px;
-    font-size: 16px;
+  
+  .plant-para-section {
     text-align: center;
-    padding: 0 15px;
+    margin-top: 20px;
   }
-
+  
   .breadImage {
-    margin-top: 30px;
-    text-align: center;
+    margin-top: 20px;
   }
-
+  
   .breadImage img {
     width: 100%;
     max-width: 300px;
+    margin-left: 0;
   }
-
-  .our-plant h2 {
-    margin-top: 40px;
-    font-size: 24px;
-    text-align: center;
-  }
-
-  .plant-para-section {
-    margin-top: 20px;
-    padding: 0 15px;
-  }
-
-  .manuacturing-unit-para p {
-    font-weight: 600;
-    font-size: 14px;
-    text-align: center;
-  }
-
-  .our-reach-main {
-    margin-bottom: 2rem;
-    padding: 0 15px;
-  }
+  
+  /* Our Reach Section - Mobile */
+   /* .our-reach-main {
+    padding: 30px 15px;
+  } */
 
   .Our-reach-heading h2 {
-    margin-top: 30px;
     font-size: 24px;
-    text-align: center;
   }
 
   .our-reach-para1 {
-    margin-top: 15px;
-    font-weight: 600;
     font-size: 14px;
-    text-align: center;
-    padding: 0 10px;
+    margin-bottom: 1.5rem;
   }
 
+  
   .smallBadge img {
-    width: 50%;
-    margin: 0 auto;
-    display: block;
+    max-width: 220px;
+    margin-left: 18rem;
+  }
+
+  .BigBadge img{
+    max-width:220px ;
   }
 
   .reach-recognition h4 {
     font-size: 16px;
-    text-align: center;
   }
 
   .reach-recognition p {
-    margin-top: 10px;
-    font-size: 13px;
-    text-align: center;
-    padding: 0 10px;
+    font-size: 14px;
   }
 
-  .BigBadge{
-    margin-left: 0;
-    width: 1rem;
-    max-width: 250px;
-    display: block;
-    margin: 2rem auto 0 auto;
+  /* Carousel - Mobile */
+  .carousel {
+    max-height: 250px;
   }
 
-  /* Layout stacking for containers and rows */
-  .container .row {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .container .row > div {
+   .our-reach-main .col-7,
+  .our-reach-main .col-5 {
     width: 100% !important;
-    max-width: 450px;
-    margin-bottom: 2rem;
+  }
+
+  .our-reach-main .col-7 {
+    text-align: center;
+    padding: 0 20px; 
+  }
+
+  
+  .our-reach-main .reach-recognition h4,
+  .our-reach-main .reach-recognition p,
+  .our-reach-main .our-reach-para1 p {
+    text-align: center;
+    margin-left: 1.5rem;
+  }
+
+   .our-reach-main .smallBadge {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+}
+
+/* Small Mobile (up to 480px) */
+@media (max-width: 480px) {
+  .about-title {
+    font-size: 1.5rem;
+  }
+  
+  .about-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .logo img {
+    max-width: 250px;
+  }
+  
+  .carousel {
+    max-height: 200px;
+  }
+  
+  .breadImage img {
+    max-width: 250px;
   }
 }

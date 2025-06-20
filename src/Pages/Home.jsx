@@ -1,3 +1,5 @@
+"use client";
+
 import "./Home.css";
 import { Navigation } from "../Components/Navigation";
 import { Footer } from "../Components/Footer";
@@ -88,32 +90,29 @@ export const Home = () => {
         console.error("Failed to fetch banner:", error);
       }
     };
-
     fetchBanner();
   }, []);
 
   return (
     <>
       <Navigation />
- <div className="banner-container">
-  {/* 
-  {mainBanner ? (
-    <img
-      src={`${API_URL}${mainBanner.image}`}
-      alt="Homepage Banner"
-      className="banner-img"
-    />
-  ) : ( 
-  */}
-    <img src={bannerImage} alt="Default Banner" className="banner-img" />
-  {/* )} */}
+      <div className="banner-container">
+        {/* Show API banner if exists, else fallback */}
+        {mainBanner ? (
+          <img
+            src={`${API_URL}${mainBanner.image}`}
+            alt="Homepage Banner"
+            className="banner-img"
+          />
+        ) : (
+          <img src={bannerImage} alt="Default Banner" className="banner-img" />
+        )}
 
-  <div className="banner-bottom">
-    <a href="/liveproducts">
-      <button className="shop-button">SHOP NOW</button>
-    </a>
-</div>
-
+        <div className="banner-bottom">
+          <a href="/liveproducts">
+            <button className="shop-button">SHOP NOW</button>
+          </a>
+        </div>
 
         <AboutUsSection
           title={aboutUsTitle}
@@ -128,11 +127,31 @@ export const Home = () => {
           <img src={YellowLine} alt="Yellow Line" className="yellow-line" />
         </div>
 
-        <FeaturedProducts
-          products={homeProducts}
-          showTitle={true}
-          showPrice={false}
-        />
+        <div className="featured-products-home">
+          <h2 className="section-title-home">Featured Products</h2>
+          <div className="product-container-home">
+            {homeProducts.map((product, index) => (
+              <div key={index} className="product-card-home">
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="product-image-home"
+                />
+                <h3
+                  className="product-title-home"
+                  style={{
+                    fontSize: "0.9rem",
+                    textAlign: "center",
+                    fontWeight: "500",
+                    marginTop: "10px",
+                  }}
+                >
+                  {product.name}
+                </h3>
+              </div>
+            ))}
+          </div>
+        </div>
 
         <div className="our-focus-section">
           <h1>OUR FOCUS : GOOD WORK</h1>

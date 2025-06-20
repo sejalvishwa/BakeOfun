@@ -8,26 +8,26 @@ export const homeProducts = [
   {
     name: "Bakeofun Dry Fruit Cookies",
     price: "INR 120.01",
-    image: dryfruitImage ,
+    image: [dryfruitImage] ,
     slug: "dryfruitcookies",
   },
   {
     name: "Bakeofun Butter Kaju Cookies",
     price: "INR 120.01",
-    image: butterKajuImage,
+    image: [butterKajuImage],
     slug : "butterkajucookies",
   },
   {
     name: "Bakeofun Fruit Burfi Cookies",
     price: "INR 120.01",
-    image: fruitBurfiImage,
+    image: [fruitBurfiImage],
     slug : "fruitbarficookies",
 
   },
   {
     name: "Bakeofun Choco Silk Cookies",
     price: "INR 100.01",
-    image: chocoSilkImage,
+    image: [chocoSilkImage],
     slug: "chocosilkcookies",
   }
 ];

@@ -1,44 +1,37 @@
-import { useState } from "react";
+import "./LiveProducts.css";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 import { Navigation } from "../Components/Navigation";
 import { Footer } from "../Components/Footer";
-import { HeaderSearchFilter } from "../Components/HeaderSearchFilter";
-import { CategoryProductList } from "../Components/CategoryProductList";
-import { products } from "../data/products"; // Cake & pastry products
+import { FeaturedProducts } from "../Components/FeaturedProducts";
+import { config } from "../config/config.js";
 
 export const LiveProducts = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [sortOption, setSortOption] = useState("recent");
+  const [products, setProducts] = useState([]);
 
-  const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value.toLowerCase());
-  };
-
-  const handleSortChange = (e) => {
-    setSortOption(e.target.value);
-  };
-
-  // Convert "INR 300.00" to number 300
-  const formatPrice = (priceStr) =>
-    Number(priceStr.replace("INR", "").replace(".00", "").trim());
-
-  const filteredProducts = products
-    .filter((product) =>
-      product.name.toLowerCase().includes(searchTerm)
-    )
-    .sort((a, b) => {
-      switch (sortOption) {
-        case "priceLowHigh":
-          return formatPrice(a.price) - formatPrice(b.price);
-        case "priceHighLow":
-          return formatPrice(b.price) - formatPrice(a.price);
-        case "nameAZ":
-          return a.name.localeCompare(b.name);
-        case "nameZA":
-          return b.name.localeCompare(a.name);
-        default:
-          return 0; // recent (original order)
+  useEffect(() => {
+    const fetchLiveProducts = async () => {
+      try {
+        const response = await axios.get(
+          `${config.API_BASE_URL}/api/live-products`
+        );
+        const productData = response.data.data;
+        const dataArray = Array.isArray(productData)
+          ? productData
+          : [productData];
+        // Only keep products that are marked as active
+        const activeProducts = dataArray.filter((p) => p.isActive);
+        setProducts(activeProducts);
+        console.log("Website Live Products:", activeProducts);
+      } catch (error) {
+        console.error("Error fetching live products:", error);
+        setProducts([]);
       }
-    });
+    };
+
+    fetchLiveProducts();
+  }, []);
 
   return (
     <>
@@ -57,14 +50,17 @@ export const LiveProducts = () => {
         <h2>Live Products</h2>
       </div>
 
-      <div className="p-4">
-        <HeaderSearchFilter
-          // category="Live Products"
-          onSearchChange={handleSearchChange}
-          onSortChange={handleSortChange}
+      {products.length > 0 ? (
+        <FeaturedProducts
+          products={products}
+          showTitle={false}
+          showPrice={true}
         />
-        <CategoryProductList products={filteredProducts} />
-      </div>
+      ) : (
+        <p style={{ textAlign: "center", marginTop: "40px", color: "#888" }}>
+          No live products available.
+        </p>
+      )}
 
       <Footer />
     </>

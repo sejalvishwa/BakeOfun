@@ -1,12 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./AddLiveProducts.css";
+import { useSearchParams } from "react-router-dom";
 
 const AddLiveProducts = () => {
+  const [searchParams] = useSearchParams();
+  const productId = searchParams.get("product_id");
+  const isEditMode = searchParams.get("isEditMode");
   const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: "",
     category: "",
@@ -24,14 +29,39 @@ const AddLiveProducts = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
-  const categories = [
-    "Bread",
-    "Rusk",
-    "Cookies",
-    "Cakes",
-    "Pastries",
-    "Others",
-  ];
+  const categories = ["Bread", "Rusk", "Cookies", "Cakes", "Pastries", "Others"];
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/api/Live-products/${productId}`);
+        if (response.data.success) {
+          const product = response.data.data;
+
+          setFormData({
+            name: product.name || "",
+            category: product.category || "",
+            categoryTitle: product.categoryTitle || "",
+            description: product.description || "",
+            price: product.price || "",
+            image: null,
+            deliveryPlatforms: product.deliveryPlatforms.map((platform) => ({
+              name: platform.name || "",
+              link: platform.link || "",
+              logo: null,
+              logoPreview: `${platform.logo}`,
+            })),
+          });
+
+          setPreviewImage(`${product.images?.[0] || ""}`);
+        }
+      } catch (error) {
+        console.error("Error fetching product:", error);
+      }
+    };
+
+    if (isEditMode) fetchProduct();
+  }, [productId, isEditMode]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -85,18 +115,14 @@ const AddLiveProducts = () => {
     const newErrors = {};
     if (!formData.name.trim()) newErrors.name = "Product name is required";
     if (!formData.category) newErrors.category = "Category is required";
-    if (!formData.categoryTitle.trim())
-      newErrors.categoryTitle = "Category title is required";
-    if (!formData.description.trim())
-      newErrors.description = "Product description is required";
-    if (!formData.price || isNaN(formData.price) || Number(formData.price) <= 0)
-      newErrors.price = "Valid price required";
-    if (!formData.image) newErrors.image = "Product image is required";
+    if (!formData.categoryTitle.trim()) newErrors.categoryTitle = "Category title is required";
+    if (!formData.description.trim()) newErrors.description = "Product description is required";
+    if (!formData.price || isNaN(formData.price) || Number(formData.price) <= 0) newErrors.price = "Valid price required";
+    if (!formData.image && !previewImage) newErrors.image = "Product image is required";
 
     formData.deliveryPlatforms.forEach((platform, index) => {
-      if (!platform.name.trim() || !platform.link.trim() || !platform.logo)
-        newErrors[`platform-${index}`] =
-          "All delivery platform fields are required";
+      if (!platform.name.trim() || !platform.link.trim() || (!platform.logo && !platform.logoPreview))
+        newErrors[`platform-${index}`] = "All delivery platform fields are required";
     });
 
     setErrors(newErrors);
@@ -116,36 +142,36 @@ const AddLiveProducts = () => {
       data.append("price", formData.price);
       data.append("description", formData.description);
       data.append("category", formData.category.toLowerCase());
+      data.append("categoryTitle", formData.categoryTitle);
 
-      // Append main product image
       if (formData.image) {
         data.append("images", formData.image);
       }
 
-      // Prepare and append delivery platforms as JSON string
-      const deliveryPlatformsData = formData.deliveryPlatforms.map(
-        (platform) => ({
-          name: platform.name,
-          link: platform.link,
-          // Note: The logo path will be handled by the server
-        })
-      );
+      const deliveryPlatformsData = formData.deliveryPlatforms.map((platform) => ({
+        name: platform.name,
+        link: platform.link,
+      }));
       data.append("deliveryPlatforms", JSON.stringify(deliveryPlatformsData));
 
-      // Append each platform logo with the same field name 'platformLogos'
       formData.deliveryPlatforms.forEach((platform) => {
         if (platform.logo) {
           data.append("platformLogos", platform.logo);
         }
       });
 
-      const response = await axios.post(
-        "http://localhost:5000/api/Live-products",
+      const url = isEditMode
+        ? `http://localhost:5000/api/Live-products/${productId}`
+        : `http://localhost:5000/api/Live-products`;
+
+      const method = isEditMode ? "put" : "post";
+
+      const response = await axios({
+        method,
+        url,
         data,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        }
-      );
+        headers: { "Content-Type": "multipart/form-data" },
+      });
 
       if (response.data.success) {
         setShowSuccess(true);
@@ -154,7 +180,7 @@ const AddLiveProducts = () => {
           navigate("/admin/live-products");
         }, 2000);
       } else {
-        alert("Failed to add product");
+        alert("Failed to submit product");
       }
     } catch (error) {
       console.error("Error submitting product:", error);
@@ -163,11 +189,12 @@ const AddLiveProducts = () => {
       setIsSubmitting(false);
     }
   };
-
   return (
     <div className="add-product-container">
       <div className="add-product-header">
-        <h1 className="page-title">Add Live Product</h1>
+        <h1 className="page-title">
+          {isEditMode ? "Edit Live Product" : "Add Live Product"}
+        </h1>
         <button
           className="btn btn-secondary"
           onClick={() => navigate("/admin/live-products")}
@@ -178,7 +205,7 @@ const AddLiveProducts = () => {
 
       {showSuccess && (
         <div className="alert alert-success">
-          Live product added successfully!
+          Live product {isEditMode ? "updated" : "added"} successfully!
         </div>
       )}
 
@@ -195,9 +222,7 @@ const AddLiveProducts = () => {
                   onChange={handleChange}
                   className={`form-control ${errors.name ? "error" : ""}`}
                 />
-                {errors.name && (
-                  <div className="error-message">{errors.name}</div>
-                )}
+                {errors.name && <div className="error-message">{errors.name}</div>}
               </div>
 
               <div className="form-group">
@@ -227,9 +252,7 @@ const AddLiveProducts = () => {
                   name="categoryTitle"
                   value={formData.categoryTitle}
                   onChange={handleChange}
-                  className={`form-control ${
-                    errors.categoryTitle ? "error" : ""
-                  }`}
+                  className={`form-control ${errors.categoryTitle ? "error" : ""}`}
                 />
                 {errors.categoryTitle && (
                   <div className="error-message">{errors.categoryTitle}</div>
@@ -242,9 +265,7 @@ const AddLiveProducts = () => {
                   name="description"
                   value={formData.description}
                   onChange={handleChange}
-                  className={`form-control ${
-                    errors.description ? "error" : ""
-                  }`}
+                  className={`form-control ${errors.description ? "error" : ""}`}
                   rows={4}
                 />
                 {errors.description && (
@@ -313,7 +334,9 @@ const AddLiveProducts = () => {
                   <input
                     type="file"
                     accept="image/*"
-                    onChange={(e) => handleLogoUpload(index, e.target.files[0])}
+                    onChange={(e) =>
+                      handleLogoUpload(index, e.target.files[0])
+                    }
                     className="form-control"
                   />
                   {platform.logoPreview && (
@@ -360,7 +383,13 @@ const AddLiveProducts = () => {
               className="btn btn-primary"
               disabled={isSubmitting}
             >
-              {isSubmitting ? "Saving..." : "Save Live Product"}
+              {isSubmitting
+                ? isEditMode
+                  ? "Updating..."
+                  : "Saving..."
+                : isEditMode
+                ? "Update Live Product"
+                : "Save Live Product"}
             </button>
           </div>
         </form>

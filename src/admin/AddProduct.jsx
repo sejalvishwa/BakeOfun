@@ -1,12 +1,15 @@
 "use client";
 
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import "./AddProduct.css";
 
 const AddProduct = () => {
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const product_id = searchParams.get("product_id");
+
   const [formData, setFormData] = useState({
     name: "",
     category: "",
@@ -24,14 +27,42 @@ const AddProduct = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
-  const categories = [
-    "Bread",
-    "Rusk",
-    "Cookies",
-    "Cakes",
-    "Pastries",
-    "Others",
-  ];
+  const categories = ["Bread", "Rusk", "Cookies", "Cakes", "Pastries", "Others"];
+
+  useEffect(() => {
+    if (product_id) {
+      axios
+        .get(`http://localhost:5000/api/products/${product_id}`)
+        .then((response) => {
+          const product = response.data.data;
+
+          setFormData({
+            name: product.name || "",
+            category: product.category || "",
+            categoryTitle: product.categoryTitle || "",
+            description: product.description || "",
+            price: product.price || "",
+            stock: product.stock || "",
+            isFeatured: product.isFeatured || false,
+            image: null,
+            deliveryPlatforms: product.deliveryPlatforms.map((platform) => ({
+              name: platform.name || "",
+              link: platform.link || "",
+              logo: null,
+              logoPreview: `${platform.logo}` || "",
+            })),
+          });
+
+          setPreviewImage(
+            product.images?.[0] ? `${product.images[0]}` : ""
+          );
+        })
+        .catch((err) => {
+          console.error("Error fetching product:", err);
+          alert("Failed to fetch product data.");
+        });
+    }
+  }, [product_id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -91,10 +122,15 @@ const AddProduct = () => {
       newErrors.description = "Product description is required";
     if (!formData.price || isNaN(formData.price) || Number(formData.price) <= 0)
       newErrors.price = "Valid price required";
-    if (!formData.image) newErrors.image = "Product image is required";
+    if (!formData.image && !previewImage)
+      newErrors.image = "Product image is required";
 
     formData.deliveryPlatforms.forEach((platform, index) => {
-      if (!platform.name.trim() || !platform.link.trim() || !platform.logo)
+      if (
+        !platform.name.trim() ||
+        !platform.link.trim() ||
+        (!platform.logo && !platform.logoPreview)
+      )
         newErrors[`platform-${index}`] =
           "All delivery platform fields are required";
     });
@@ -105,41 +141,37 @@ const AddProduct = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!validateForm()) return;
 
     setIsSubmitting(true);
 
     try {
       const data = new FormData();
-      data.append("name", formData.name);
+      data.append("name", formData.name.trim());
       data.append("price", formData.price);
-      data.append("description", formData.description);
+      data.append("description", formData.description.trim());
       data.append("category", formData.category.toLowerCase());
+      data.append("stock", formData.stock);
+      data.append("isFeatured", formData.isFeatured);
 
-      // Append main product image
       if (formData.image) {
         data.append("images", formData.image);
       }
 
-      // First append all platform logos with temporary filenames
-      const platformLogosInfo = formData.deliveryPlatforms.map(
-        (platform, index) => {
-          const logoFilename = platform.logo
-            ? `platform-logo-${index}.${platform.logo.name.split(".").pop()}`
-            : "";
-          return {
-            name: platform.name,
-            link: platform.link,
-            logo: logoFilename, // This will be replaced by server with actual path
-          };
-        }
-      );
+      const platformData = formData.deliveryPlatforms.map((platform, index) => {
+        const logoFilename = platform.logo
+          ? `platform-logo-${index}.${platform.logo.name.split(".").pop()}`
+          : platform.logoPreview?.split("/").pop() || "";
 
-      // Then append the deliveryPlatforms as JSON
-      data.append("deliveryPlatforms", JSON.stringify(platformLogosInfo));
+        return {
+          name: platform.name,
+          link: platform.link,
+          logo: logoFilename,
+        };
+      });
 
-      // Finally append each platform logo file
+      data.append("deliveryPlatforms", JSON.stringify(platformData));
+
       formData.deliveryPlatforms.forEach((platform, index) => {
         if (platform.logo) {
           data.append(
@@ -150,13 +182,20 @@ const AddProduct = () => {
         }
       });
 
-      const response = await axios.post(
-        "http://localhost:5000/api/products",
+      const url = product_id
+        ? `http://localhost:5000/api/products/${product_id}`
+        : "http://localhost:5000/api/products";
+
+      const method = product_id ? "put" : "post";
+
+      const response = await axios({
+        method,
+        url,
         data,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        }
-      );
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       if (response.data.success) {
         setShowSuccess(true);
@@ -165,20 +204,21 @@ const AddProduct = () => {
           navigate("/admin/products");
         }, 2000);
       } else {
-        alert("Failed to add product");
+        alert("Failed to save product");
       }
     } catch (error) {
       console.error("Error submitting product:", error);
       alert("Error submitting product");
-    } finally {
+    } finally { 
       setIsSubmitting(false);
     }
   };
-
   return (
     <div className="add-product-container">
       <div className="add-product-header">
-        <h1 className="page-title">Add Product</h1>
+        <h1 className="page-title">
+          {product_id ? "Edit Product" : "Add Product"}
+        </h1>
         <button
           className="btn btn-secondary"
           onClick={() => navigate("/admin/products")}
@@ -188,15 +228,14 @@ const AddProduct = () => {
       </div>
 
       {showSuccess && (
-        <div className="alert alert-success">
-          Product added successfully!
-        </div>
+        <div className="alert alert-success">Product saved successfully!</div>
       )}
 
       <div className="card">
         <form onSubmit={handleSubmit} className="add-product-form">
           <div className="form-grid">
             <div className="form-column">
+              {/* Name */}
               <div className="form-group">
                 <label className="form-label">Product Name *</label>
                 <input
@@ -211,6 +250,7 @@ const AddProduct = () => {
                 )}
               </div>
 
+              {/* Category */}
               <div className="form-group">
                 <label className="form-label">Category *</label>
                 <select
@@ -231,6 +271,7 @@ const AddProduct = () => {
                 )}
               </div>
 
+              {/* Category Title */}
               <div className="form-group">
                 <label className="form-label">Category Title *</label>
                 <input
@@ -247,6 +288,7 @@ const AddProduct = () => {
                 )}
               </div>
 
+              {/* Description */}
               <div className="form-group">
                 <label className="form-label">Product Description *</label>
                 <textarea
@@ -263,6 +305,7 @@ const AddProduct = () => {
                 )}
               </div>
 
+              {/* Price */}
               <div className="form-group">
                 <label className="form-label">Price (₹) *</label>
                 <input
@@ -278,6 +321,7 @@ const AddProduct = () => {
                 )}
               </div>
 
+              {/* Product Image */}
               <div className="form-group">
                 <label className="form-label">Product Image *</label>
                 <input
@@ -299,6 +343,7 @@ const AddProduct = () => {
               </div>
             </div>
 
+            {/* Delivery Platforms */}
             <div className="form-column">
               <label className="form-label">Delivery Platforms *</label>
               {formData.deliveryPlatforms.map((platform, index) => (
@@ -371,7 +416,11 @@ const AddProduct = () => {
               className="btn btn-primary"
               disabled={isSubmitting}
             >
-              {isSubmitting ? "Saving..." : "Save Product"}
+              {isSubmitting
+                ? "Saving..."
+                : product_id
+                ? "Update Product"
+                : "Save Product"}
             </button>
           </div>
         </form>

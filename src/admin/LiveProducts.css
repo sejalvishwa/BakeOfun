@@ -177,7 +177,7 @@
   margin-right: 6px;
   margin-bottom: 4px;
   padding: 4px 10px;
-  background-color: #007bff;
+  background-color: #F7AC0A;
   color: white;
   border-radius: 12px;
   font-size: 0.75rem;
@@ -199,6 +199,41 @@
   padding: 30px;
   color: #666;
 }
+
+.actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.action-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  font-size: 18px;
+  transition: color 0.2s ease;
+  color: #555;
+}
+
+.action-icon.edit{
+   background-color: rgba(10, 42, 138, 0.1);
+  color: #0a2a8a;
+}
+
+.action-icon.edit:hover {
+  color: #007bff;
+}
+
+.action-icon.delete {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
+}
+
+.action-icon.delete:hover {
+  color: #dc3545;
+}
+
 
 @media (max-width: 768px) {
   .live-products-header {

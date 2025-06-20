@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  overflow-x: hidden; 
+  overflow-x: hidden;
 }
 .banner-container {
   position: relative;
@@ -12,16 +12,14 @@ body {
   display: block;
 }
 
-/* Yellow strip at bottom */
 .banner-bottom {
-  background-color: #ffc800; /* Yellow */
+  background-color: #ffc800;
   text-align: center;
   padding: 20px 0;
 }
 
-/* Blue "Shop Now" button */
 .shop-button {
-  background-color: #2C2C93; /* Blue */
+  background-color: #2c2c93;
   color: white;
   border: none;
   padding: 14px 24px;
@@ -32,42 +30,45 @@ body {
   transition: opacity 0.3s ease;
 }
 
-.text-about-us h1{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 45px;
-    font-weight: 500;
-    color: #1D1D62;
+.text-about-us h1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 45px;
+  font-weight: 500;
+  color: #1d1d62;
 }
 
-.text-about-us p{
-text-align: center;
-margin: 0 auto;
-font-size: 20px;
-margin-top: 20px;
-color: rgb(46, 46, 46,1);
-line-height: 1.6;
+.text-about-us p {
+  text-align: center;
+  margin: 0 auto;
+  font-size: 20px;
+  margin-top: 20px;
+  color: rgb(46, 46, 46, 1);
+  line-height: 1.6;
 }
 
-.yellow-line{
-  margin-top: 2rem;
+.yellow-line {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 2rem auto;
 }
 
 .center-line {
   display: inline;
 }
 
-.Learn-more-btn{
+.Learn-more-btn {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 30px;
 }
 
-
-.Learn-more-btn button{
-  background-color: #F5C600;
+.Learn-more-btn button {
+  background-color: #f5c600;
   color: #353535;
   border: none;
   padding: 16px 26px;
@@ -77,78 +78,73 @@ line-height: 1.6;
   cursor: pointer;
 }
 
-.Learn-more-btn button:hover{
-  background-color: #FFCE00;
-
+.Learn-more-btn button:hover {
+  background-color: #ffce00;
 }
 
-.featured-products h1{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 50px;
-  font-size: 28px;
-  color: #2C2C93;
+/* ---------- Updated Featured Products for Home ---------- */
+
+.featured-products-home {
+  padding: 40px;
+  text-align: center;
 }
 
-.product-container {
+.section-title-home {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #f5c600;
+}
+
+.product-container-home {
   display: flex;
   flex-direction: row;
   justify-content: center;
   gap: 50px;
   margin-top: 20px;
-  flex-wrap: nowrap; 
-  overflow-x: auto; 
+  flex-wrap: nowrap;
+  overflow-x: auto;
   padding: 10px 0;
 }
 
-.product-wrapper {
- width: 220px;
-  text-align: center;
-  margin-bottom: 20px;
-  flex-shrink: 0; 
-}
-
-.product-card {
+.product-card-home {
   border: 1px solid #dbdbdb;
   padding: 10px;
-  /* border-radius: 8px; */
   background-color: #fff;
+  width: 220px;
+  flex-shrink: 0;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+}
+
+.product-image-home {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  object-fit: cover;
   cursor: pointer;
 }
 
-.product-card img {
-  width: 100%;
-  height: auto;
-  /* border-radius: 5px; */
-}
-
-/* Name and price outside the card */
-.product-info {
-  margin-top: 10px;
-}
-
-.product-name {
-  font-size: 14px;
+.product-title-home {
+  text-align: center;
+  font-size: 0.9rem;
   font-weight: 500;
-  color: #222;
+  margin-top: 10px;
+  color: #333;
 }
 
-.product-price {
-  font-size: 14px;
-  color: #444;
-}
+/* ---------- Other Existing Sections ---------- */
 
-.our-focus-section{
-  background-color: #2C2C93;
-  padding: 30px 0;        
+.our-focus-section {
+  background-color: #2c2c93;
+  padding: 30px 0;
   width: 100vw;
   margin-left: calc(-50vw + 50%);
   position: relative;
   z-index: 1;
 }
 
-.our-focus-section h1{
+.our-focus-section h1 {
   color: #ffc002;
   text-align: center;
   font-size: 30px;
@@ -163,7 +159,6 @@ line-height: 1.6;
   margin: 60px 0 40px;
   flex-wrap: wrap;
   text-align: center;
-  
 }
 
 .feature-card {
@@ -176,7 +171,6 @@ line-height: 1.6;
   height: 90px;
   object-fit: contain;
   margin-bottom: 15px;
-  
 }
 
 .feature-card p {
@@ -190,8 +184,8 @@ line-height: 1.6;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 30px;
-  padding: 40px 60px; 
-  background-image: url('../assets/images/ourfortebanner.jpg');
+  padding: 40px 60px;
+  background-image: url("../assets/images/ourfortebanner.jpg");
   background-size: cover;
   margin-top: 60px;
   width: 100vw;
@@ -200,14 +194,14 @@ line-height: 1.6;
 }
 
 .forte-items {
- background: rgba(255, 255, 255, 0.2); /* semi-transparent */
+  background: rgba(255, 255, 255, 0.2);
   padding: 30px 60px;
   text-align: center;
   border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); /* deeper shadow for depth */
-  backdrop-filter: blur(10px); /* blur for glassmorphism */
-  -webkit-backdrop-filter: blur(10px); /* Safari support */
-  border: 1px solid rgba(255, 255, 255, 0.3); /* light border for shine */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
@@ -220,7 +214,6 @@ line-height: 1.6;
   width: 60px;
   height: 60px;
   margin-bottom: 20px;
-  /* background-color: #F5C600; */
 }
 
 .forte-items h3 {
@@ -242,7 +235,7 @@ line-height: 1.6;
 }
 
 .our-presence-section h1 {
-  color: #FFCE00;
+  color: #ffce00;
   font-size: 35px;
   font-weight: 600;
   margin-bottom: 40px;
@@ -252,8 +245,8 @@ line-height: 1.6;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 50px; /* spacing between logos */
-  flex-wrap: wrap; /* wraps on small screens */
+  gap: 50px;
+  flex-wrap: wrap;
 }
 
 .our-presence-logos img {
@@ -265,4 +258,139 @@ line-height: 1.6;
 
 .our-presence-logos img:hover {
   transform: scale(1.05);
+}
+
+/* ----------- Responsive Styles ----------- */
+
+@media (max-width: 1024px) {
+  .our-focus-section h1,
+  .our-presence-section h1,
+  .section-title-home {
+    font-size: 24px;
+  }
+
+  .product-container-home {
+    gap: 30px;
+    padding: 0 10px;
+  }
+
+  .product-card-home {
+    width: 180px;
+  }
+
+  .forte-items {
+    padding: 20px 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .banner-bottom {
+    padding: 15px 0;
+  }
+
+  .shop-button {
+    padding: 12px 20px;
+    font-size: 13px;
+  }
+
+  .text-about-us p {
+    font-size: 16px;
+    padding: 0 10px;
+  }
+
+  .product-container-home {
+    gap: 20px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-left: 10px;
+  }
+
+  .product-card-home {
+    width: 160px;
+    margin-right: 10px;
+  }
+
+  .feature-card {
+    max-width: 200px;
+  }
+
+  .feature-card img {
+    width: 70px;
+    height: 70px;
+  }
+
+  .feature-card p {
+    font-size: 14px;
+  }
+
+  .our-forte-section {
+    padding: 30px 20px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .our-presence-logos {
+    gap: 30px;
+  }
+
+  .our-presence-logos img {
+    width: 140px;
+  }
+
+  .forte-items {
+    padding: 20px;
+  }
+
+  .forte-items img {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .text-about-us h1 {
+    font-size: 20px;
+    margin-top: 30px;
+    text-align: center;
+    padding: 0 10px;
+  }
+
+  .text-about-us p {
+    font-size: 14px;
+    margin-top: 15px;
+  }
+
+  .shop-button {
+    padding: 10px 18px;
+    font-size: 12px;
+  }
+
+  .product-card-home {
+    padding: 8px;
+    width: 140px;
+  }
+
+  .product-title-home {
+    font-size: 0.85rem;
+    margin-top: 8px;
+  }
+
+  .product-container-home {
+    gap: 15px;
+  }
+
+  .feature-card p {
+    font-size: 13px;
+  }
+
+  .forte-items {
+    padding: 16px;
+  }
+
+  .our-presence-section h1 {
+    font-size: 24px;
+  }
+
+  .our-presence-logos img {
+    width: 110px;
+  }
 }

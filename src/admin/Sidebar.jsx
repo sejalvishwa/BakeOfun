@@ -22,6 +22,8 @@ function Sidebar() {
         { path: "/admin/live-products", label: "Live Products", icon: "visibility" },
         { path: "/admin/add-liveproducts", label: "Add Live Products", icon: "add_circle" },
         { path: "/admin/contact", label: "Contact", icon: "contact_mail" },
+        { path: "/admin/news", label: "News", icon: "mail" },
+        { path: "/admin/add-news", label: "Add News", icon: "add_circle" },
     ];
 
     return (
